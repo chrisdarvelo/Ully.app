@@ -2,7 +2,7 @@ import 'dotenv/config';
 
 export default {
   expo: {
-    name: 'Ully Coffee',
+    name: 'Ully AI',
     slug: 'ully-coffee',
     version: '1.0.0',
     orientation: 'portrait',
@@ -71,9 +71,9 @@ export default {
         'expo-speech-recognition',
         {
           microphonePermission:
-            'Ully Coffee needs microphone access for voice input.',
+            'Ully AI needs microphone access for voice input.',
           speechRecognitionPermission:
-            'Ully Coffee needs speech recognition to convert your voice to text.',
+            'Ully AI needs speech recognition to convert your voice to text.',
         },
       ],
     ],
