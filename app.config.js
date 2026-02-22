@@ -40,7 +40,7 @@ export default {
       package: 'com.ullycoffee.app',
       versionCode: 1,
       permissions: ['CAMERA', 'ACCESS_COARSE_LOCATION'],
-      googleServicesFile: './google-services.json',
+      googleServicesFile: process.env.GOOGLE_SERVICES_JSON ?? './google-services.json',
     },
     plugins: [
       'expo-secure-store',
