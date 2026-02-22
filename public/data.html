@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Ully Coffee Data Usage — a full breakdown of what data is collected, where it lives, and who sees it." />
+  <title>Data Usage — Ully Coffee</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <nav>
+    <a href="/" class="nav-brand">ULLY</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="privacy.html">Privacy</a></li>
+      <li><a href="terms.html">Terms</a></li>
+      <li><a href="support.html">Support</a></li>
+    </ul>
+  </nav>
+
+  <div class="legal-wrap">
+
+    <h1>Data Usage</h1>
+    <div class="meta">
+      Last updated: February 21, 2026 &nbsp;·&nbsp; A plain-language breakdown of every data point Ully touches.
+    </div>
+
+    <h2>The Short Version</h2>
+    <div class="highlight-box">
+      <p>
+        We collect one thing: your email address, to create your account.
+        Everything else — your recipes, profile, saved cafes, chat history — lives on your device
+        and never leaves it. We have no access to your conversations or content.
+      </p>
+    </div>
+
+    <h2>Full Data Map</h2>
+    <p>
+      The table below covers every data point the app interacts with, where it lives,
+      and whether we have access to it.
+    </p>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Data</th>
+          <th>Where it lives</th>
+          <th>We can see it?</th>
+          <th>Third party</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Email address</td>
+          <td>Firebase Authentication (Google)</td>
+          <td><span class="badge badge-yes">Yes</span></td>
+          <td>Google</td>
+        </tr>
+        <tr>
+          <td>Password</td>
+          <td>Firebase (hashed, never readable)</td>
+          <td><span class="badge badge-no">No</span></td>
+          <td>Google</td>
+        </tr>
+        <tr>
+          <td>Chat history</td>
+          <td>Your device only (AsyncStorage)</td>
+          <td><span class="badge badge-no">No</span></td>
+          <td>None</td>
+        </tr>
+        <tr>
+          <td>AI messages (in transit)</td>
+          <td>Sent to Anthropic API, not stored</td>
+          <td><span class="badge badge-no">No</span></td>
+          <td>Anthropic</td>
+        </tr>
+        <tr>
+          <td>Photos / camera images</td>
+          <td>Sent to Anthropic API, not stored anywhere</td>
+          <td><span class="badge badge-no">No</span></td>
+          <td>Anthropic</td>
+        </tr>
+        <tr>
+          <td>Recipes</td>
+          <td>Your device only (AsyncStorage)</td>
+          <td><span class="badge badge-no">No</span></td>
+          <td>None</td>
+        </tr>
+        <tr>
+          <td>Profile (name, role, preferences)</td>
+          <td>Your device only (AsyncStorage)</td>
+          <td><span class="badge badge-no">No</span></td>
+          <td>None</td>
+        </tr>
+        <tr>
+          <td>Saved cafes</td>
+          <td>Your device only (AsyncStorage)</td>
+          <td><span class="badge badge-no">No</span></td>
+          <td>None</td>
+        </tr>
+        <tr>
+          <td>Barista follows</td>
+          <td>Your device only (AsyncStorage)</td>
+          <td><span class="badge badge-no">No</span></td>
+          <td>None</td>
+        </tr>
+        <tr>
+          <td>Approximate location</td>
+          <td>Used once per request, never stored</td>
+          <td><span class="badge badge-no">No</span></td>
+          <td>wttr.in (weather only)</td>
+        </tr>
+        <tr>
+          <td>Date of birth</td>
+          <td>Never stored — age check only at signup</td>
+          <td><span class="badge badge-no">No</span></td>
+          <td>None</td>
+        </tr>
+        <tr>
+          <td>Analytics / usage data</td>
+          <td>Not collected</td>
+          <td><span class="badge badge-no">No</span></td>
+          <td>None</td>
+        </tr>
+        <tr>
+          <td>Advertising identifiers</td>
+          <td>Not collected</td>
+          <td><span class="badge badge-no">No</span></td>
+          <td>None</td>
+        </tr>
+        <tr>
+          <td>Contacts, call logs, SMS</td>
+          <td>Not collected</td>
+          <td><span class="badge badge-no">No</span></td>
+          <td>None</td>
+        </tr>
+        <tr>
+          <td>Browsing history</td>
+          <td>Not collected</td>
+          <td><span class="badge badge-no">No</span></td>
+          <td>None</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>How AI Messages Are Handled</h2>
+    <p>
+      When you send a message or photo to Ully AI, here is exactly what happens:
+    </p>
+    <ul>
+      <li>Your message and any attached photo are sent from your device to a Firebase Cloud Function running on Google's servers</li>
+      <li>The Cloud Function forwards the message to Anthropic's Claude API for processing — your email or account ID is never included</li>
+      <li>Anthropic returns an AI-generated response</li>
+      <li>The response is delivered to your device</li>
+      <li>Neither we nor Firebase store the message content — it exists only in transit</li>
+      <li>Your conversation is saved only to your device's local storage</li>
+    </ul>
+    <p>
+      Per Anthropic's API data usage policy, your inputs are not used to train AI models.
+      Anthropic retains data only briefly for trust and safety monitoring.
+      See <a href="https://www.anthropic.com/legal/privacy" target="_blank" rel="noopener">Anthropic's Privacy Policy</a> for details.
+    </p>
+
+    <h2>Location Data</h2>
+    <p>
+      Ully requests your approximate location (not precise GPS) to fetch local weather
+      conditions and provide weather-aware drink recommendations. Specifically:
+    </p>
+    <ul>
+      <li>We request "coarse" location — city-level, not street-level precision</li>
+      <li>Your location is passed to <a href="https://wttr.in" target="_blank" rel="noopener">wttr.in</a>, a public weather service, in each AI request that uses weather context</li>
+      <li>Your location is never stored by us or transmitted for any other purpose</li>
+      <li>You can deny location permission and Ully will function normally without weather context</li>
+    </ul>
+
+    <h2>Third-Party Services Summary</h2>
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Service</th>
+          <th>Provider</th>
+          <th>Purpose</th>
+          <th>Data shared</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Firebase Authentication</td>
+          <td>Google</td>
+          <td>Account creation and sign-in</td>
+          <td>Email address</td>
+        </tr>
+        <tr>
+          <td>Claude API</td>
+          <td>Anthropic</td>
+          <td>AI chat and image analysis</td>
+          <td>Messages and photos (in transit only)</td>
+        </tr>
+        <tr>
+          <td>wttr.in</td>
+          <td>Public service</td>
+          <td>Weather context for AI recommendations</td>
+          <td>Approximate location</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>Data We Do Not Sell or Share</h2>
+    <p>
+      We do not sell, rent, trade, license, or otherwise share your personal data with
+      any third party for commercial, marketing, or advertising purposes.
+    </p>
+    <p>
+      We do not use: analytics SDKs, advertising networks, crash reporting services,
+      A/B testing tools, heatmap tools, session recording tools, or any other behavioral
+      tracking systems.
+    </p>
+
+    <h2>Google Play Data Safety</h2>
+    <p>
+      In Google Play's Data Safety section, Ully discloses the following:
+    </p>
+    <ul>
+      <li><strong>Data collected:</strong> Email address (account management, required)</li>
+      <li><strong>Data shared:</strong> Messages and photos shared with Anthropic for AI processing (ephemeral, not stored)</li>
+      <li><strong>Data encrypted in transit:</strong> Yes</li>
+      <li><strong>Data deletion:</strong> Users can delete all data from within the app</li>
+      <li><strong>No data sale:</strong> We do not sell any user data</li>
+    </ul>
+
+    <h2>Your Controls</h2>
+    <ul>
+      <li><strong>Camera permission:</strong> Deny at any time in your device settings — other features remain unaffected</li>
+      <li><strong>Location permission:</strong> Deny at any time — AI still works without weather context</li>
+      <li><strong>Chat history:</strong> Clear at any time from within the app</li>
+      <li><strong>Account &amp; all data:</strong> Delete permanently from within the app at any time</li>
+    </ul>
+
+    <h2>Contact</h2>
+    <p>
+      Data questions or deletion requests:<br />
+      <a href="mailto:support@ullycoffee.com">support@ullycoffee.com</a>
+    </p>
+
+  </div>
+
+  <footer>
+    <span class="footer-brand">ULLY</span>
+    <ul class="footer-links">
+      <li><a href="privacy.html">Privacy Policy</a></li>
+      <li><a href="terms.html">Terms of Use</a></li>
+      <li><a href="data.html">Data Usage</a></li>
+      <li><a href="delete-account.html">Delete Account</a></li>
+      <li><a href="support.html">Support</a></li>
+    </ul>
+    <a href="mailto:support@ullycoffee.com" class="footer-email">support@ullycoffee.com</a>
+    <p class="footer-copy">© 2026 Ully Coffee. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>
