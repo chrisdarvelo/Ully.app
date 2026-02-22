@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Ully Coffee Privacy Policy — what we collect, what we don't, and how we protect your data." />
+  <meta name="description" content="Ully Coffee Privacy Policy." />
   <title>Privacy Policy — Ully Coffee</title>
   <link rel="stylesheet" href="css/style.css" />
 </head>
@@ -19,227 +19,147 @@
     </ul>
   </nav>
 
-  <div class="legal-wrap">
-
+  <div class="legal-hero">
+    <p class="eyebrow">Legal</p>
     <h1>Privacy Policy</h1>
-    <div class="meta">
-      Last updated: February 21, 2026 &nbsp;·&nbsp; Effective: February 21, 2026
-    </div>
+    <p class="meta">Last updated February 21, 2026 &nbsp;·&nbsp; Effective February 21, 2026</p>
+  </div>
+
+  <div class="legal-body">
 
     <h2>Introduction</h2>
     <p>
-      Ully ("we," "our," or "the app") is an AI-powered coffee companion that helps baristas
-      and coffee enthusiasts with espresso extraction, equipment diagnostics, recipes, and
-      brewing guidance. Responses are generated in real-time by an artificial intelligence
-      model (Claude, by Anthropic).
+      Ully is an AI-powered coffee companion for baristas and coffee enthusiasts.
+      Responses are generated in real-time by Claude, an AI model by Anthropic.
     </p>
     <p>
-      This Privacy Policy explains what data we collect, what we do not collect, and how we
-      handle your information. We are committed to collecting the absolute minimum data
-      necessary to operate the app.
+      This policy explains what data we collect, what we don't, and how we handle your
+      information. We collect the absolute minimum necessary to operate the app.
     </p>
 
     <h2>Age Requirement</h2>
     <p>
-      Ully is intended for users aged 13 and older. We do not knowingly collect personal
-      information from children under 13. If you are a parent or guardian and believe your
-      child has provided us with personal information, please contact us at
-      <a href="mailto:support@ullycoffee.com">support@ullycoffee.com</a> and we will
-      promptly delete it.
+      Ully is intended for users 13 and older. We do not knowingly collect personal information
+      from children under 13. If you believe your child has provided information to us, contact
+      <a href="mailto:support@ullycoffee.com">support@ullycoffee.com</a> and we will delete it promptly.
     </p>
 
     <h2>What We Collect</h2>
-    <div class="highlight-box">
-      <p>The only information we collect and store on our servers is your email address —
-      used solely to create and authenticate your account via Firebase Authentication.
-      We do not use it for marketing.</p>
+    <div class="callout">
+      <p>
+        The only information we collect and store on our servers is your email address —
+        used solely to create and authenticate your account. We do not use it for marketing.
+      </p>
     </div>
     <p>
-      Everything else — your profile, recipes, saved cafes, and chat history — is stored
-      locally on your device only and never transmitted to our servers.
+      Everything else — your profile, recipes, saved cafes, and chat history — lives on your
+      device only and never reaches our servers.
     </p>
 
     <h2>What We Do Not Collect</h2>
     <ul>
-      <li>
-        <strong>Chat messages and AI conversations:</strong> Your chat history with Ully AI
-        is stored on your device only. We have no access to your conversations.
-      </li>
-      <li>
-        <strong>Photos and images:</strong> When you use Dial-in or Scan, photos are sent
-        directly to Anthropic's API for real-time analysis. We do not store, upload, or
-        retain your photos on any server. Images are discarded after the AI response is returned.
-      </li>
-      <li>
-        <strong>Location or GPS data:</strong> We request approximate location permission
-        only to provide weather-aware coffee recommendations. Your location is never stored,
-        logged, or transmitted to our servers.
-      </li>
-      <li>
-        <strong>Profile and app data:</strong> Your username, role, recipes, saved cafes,
-        and barista follows are stored locally on your device — not on our servers.
-      </li>
-      <li>
-        <strong>Date of birth:</strong> Used only for the one-time age verification check
-        at signup. It is never stored on our servers or on your device.
-      </li>
-      <li>
-        <strong>Behavioral or analytics data:</strong> We do not use any analytics,
-        advertising, or tracking SDKs.
-      </li>
-      <li>Contacts, call logs, browsing history, or any other device data.</li>
+      <li>Chat messages — stored on your device only, we have no access</li>
+      <li>Photos — sent to Anthropic's API for real-time analysis, never stored anywhere</li>
+      <li>Location — used once per request for weather context, never stored or logged</li>
+      <li>Profile and app data — recipes, cafes, barista follows stay on your device only</li>
+      <li>Date of birth — used for age check at signup only, never stored</li>
+      <li>Analytics, advertising IDs, or any behavioral data</li>
+      <li>Contacts, call logs, browsing history, or any other device data</li>
     </ul>
 
-    <h2>Artificial Intelligence &amp; Generated Content</h2>
+    <h2>AI and Generated Content</h2>
     <p>
-      Ully uses Claude, a large language model developed by Anthropic, to generate responses
-      and analyze photos. This means:
+      Ully uses Claude by Anthropic to generate responses and analyze photos. When you send
+      a message or image, it is transmitted to Anthropic's API via a Firebase Cloud Function —
+      your email or account ID is never included. Per Anthropic's API terms, your inputs are not
+      used to train their models. See
+      <a href="https://www.anthropic.com/legal/privacy" target="_blank" rel="noopener">Anthropic's Privacy Policy</a> for details.
     </p>
-    <ul>
-      <li>
-        All AI responses are generated in real-time and may not always be accurate. Do not
-        rely on Ully for safety-critical decisions.
-      </li>
-      <li>
-        When you send a message or photo, it is transmitted to Anthropic's API for processing.
-        Per Anthropic's API terms, your inputs are not used to train their models and are
-        retained only briefly for trust and safety monitoring. See
-        <a href="https://www.anthropic.com/legal/privacy" target="_blank" rel="noopener">Anthropic's Privacy Policy</a>
-        for details.
-      </li>
-      <li>
-        AI responses are proxied through a Firebase Cloud Function — your queries never
-        include your email or account identifiers when sent to Anthropic.
-      </li>
-    </ul>
     <p>
-      Ully AI is a coffee-specific assistant. It is not a substitute for professional
-      equipment repair, medical, legal, or financial advice.
+      AI responses are informational only and may not always be accurate. Ully is not a
+      substitute for professional advice.
     </p>
 
-    <h2>Camera and Photo Library</h2>
+    <h2>Camera and Photos</h2>
     <p>
-      Ully requests camera and photo library access only for the Dial-in (extraction analysis)
-      and Scan (part identification) AI features. You may deny these permissions and the rest
-      of the app will continue to function normally.
-    </p>
-    <p>
-      Photos are never uploaded to our servers, never stored in your account, and never
-      shared with any party other than Anthropic's API for the specific analysis you requested.
+      Camera and photo library access is requested only for the Dial-in and Scan AI features.
+      You may deny these permissions — the rest of the app will work normally. Photos are never
+      uploaded to our servers or retained after the AI response is returned.
     </p>
 
     <h2>How We Use Your Email</h2>
-    <p>Your email address is used solely to:</p>
     <ul>
       <li>Create and authenticate your Ully account</li>
       <li>Send a password reset email if you request one</li>
     </ul>
-    <p>
-      We do not send marketing emails. We do not share your email with third parties
-      for any purpose.
-    </p>
+    <p>We do not send marketing emails. We do not share your email with any third party.</p>
 
     <h2>Data Storage and Security</h2>
     <ul>
-      <li>
-        Your email and authentication credentials are stored securely with Google Firebase
-        Authentication using industry-standard encryption.
-      </li>
-      <li>
-        All other app data (profile, recipes, cafes, chat history) is stored locally on
-        your device and is never transmitted to our servers.
-      </li>
-      <li>
-        We do not maintain any database of user-generated content, recipes, or conversations.
-      </li>
+      <li>Email and credentials stored securely with Google Firebase Authentication</li>
+      <li>All other app data stored locally on your device, never transmitted to our servers</li>
+      <li>We maintain no database of user-generated content, recipes, or conversations</li>
     </ul>
 
     <h2>Third-Party Services</h2>
     <ul>
-      <li>
-        <strong>Google Firebase (Authentication only):</strong> Stores your email address
-        and manages secure sign-in. Subject to
-        <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google's Privacy Policy</a>.
-      </li>
-      <li>
-        <strong>Anthropic (Claude API):</strong> Processes your AI chat messages and photos
-        in real-time. Inputs are not used for model training. Subject to
-        <a href="https://www.anthropic.com/legal/privacy" target="_blank" rel="noopener">Anthropic's Privacy Policy</a>.
-      </li>
-      <li>
-        <strong>wttr.in (Weather):</strong> Provides approximate weather data based on your
-        coarse location. No account or identifier is transmitted.
-      </li>
+      <li><strong>Google Firebase</strong> — Authentication only. Stores your email. Subject to Google's Privacy Policy.</li>
+      <li><strong>Anthropic Claude API</strong> — Processes AI messages and photos in real-time. Not used for training. Subject to Anthropic's Privacy Policy.</li>
+      <li><strong>wttr.in</strong> — Weather data via approximate location. No account or identifier transmitted.</li>
     </ul>
     <p>
-      We do not use analytics SDKs, advertising networks, crash reporting services, or any
-      other third-party data collection tools.
+      We do not use analytics SDKs, advertising networks, crash reporting, or any other
+      third-party tracking tools.
     </p>
 
     <h2>We Do Not Sell Your Data</h2>
     <p>
-      We do not sell, rent, trade, or share your personal information with any third party
-      for commercial or marketing purposes. This applies to all users, including California
-      residents under the California Consumer Privacy Act (CCPA).
+      We do not sell, rent, trade, or share your personal information for commercial or
+      marketing purposes. This applies to all users, including California residents under CCPA.
     </p>
 
     <h2>Your Rights</h2>
-    <p>You have the right to:</p>
     <ul>
-      <li>Access the email address linked to your account</li>
-      <li>Edit or update your local profile at any time through the app</li>
-      <li>Delete your account and all associated data directly within the app</li>
-      <li>Clear your local chat history at any time through the app</li>
-      <li>
-        Request data deletion by emailing
-        <a href="mailto:support@ullycoffee.com">support@ullycoffee.com</a>
-        if you cannot access the app
-      </li>
+      <li>Access the email linked to your account</li>
+      <li>Edit your local profile at any time in the app</li>
+      <li>Delete your account and all data from within the app</li>
+      <li>Clear your local chat history at any time</li>
+      <li>Request deletion by email if you can't access the app</li>
     </ul>
     <p>
-      California residents have additional rights under the CCPA, including the right to
-      know what personal data is collected and the right to opt out of data sales (we do not
-      sell data). EEA/UK residents have rights under GDPR including access, rectification,
-      erasure, and portability. Contact
-      <a href="mailto:support@ullycoffee.com">support@ullycoffee.com</a>
-      to exercise any of these rights.
+      California residents (CCPA) and EEA/UK residents (GDPR) have additional rights.
+      Contact <a href="mailto:support@ullycoffee.com">support@ullycoffee.com</a> to exercise them.
     </p>
 
     <h2>Account Deletion</h2>
     <p>
-      You can permanently delete your account at any time from within the app.
-      See our <a href="delete-account.html">Account Deletion</a> page for step-by-step
-      instructions. If you cannot access the app, email
-      <a href="mailto:support@ullycoffee.com">support@ullycoffee.com</a> and we will
-      process your request within 30 days.
+      Delete your account at any time from the Profile tab in the app.
+      See <a href="delete-account.html">Account Deletion</a> for step-by-step instructions.
+      Email requests are processed within 30 days.
     </p>
 
-    <h2>Changes to This Policy</h2>
+    <h2>Changes</h2>
     <p>
-      We may update this Privacy Policy from time to time. We will notify you of material
-      changes by posting the updated policy within the app. Continued use of Ully after
-      changes constitutes acceptance of the updated policy.
+      We may update this policy from time to time. Material changes will be communicated
+      within the app. Continued use after changes constitutes acceptance.
     </p>
 
     <h2>Contact</h2>
-    <p>
-      Questions about this Privacy Policy or your data:<br />
-      <a href="mailto:support@ullycoffee.com">support@ullycoffee.com</a>
-    </p>
+    <p><a href="mailto:support@ullycoffee.com">support@ullycoffee.com</a></p>
 
   </div>
 
   <footer>
-    <span class="footer-brand">ULLY</span>
+    <span class="footer-left">ULLY</span>
     <ul class="footer-links">
-      <li><a href="privacy.html">Privacy Policy</a></li>
-      <li><a href="terms.html">Terms of Use</a></li>
+      <li><a href="privacy.html">Privacy</a></li>
+      <li><a href="terms.html">Terms</a></li>
       <li><a href="data.html">Data Usage</a></li>
       <li><a href="delete-account.html">Delete Account</a></li>
       <li><a href="support.html">Support</a></li>
+      <li><a href="mailto:support@ullycoffee.com">Contact</a></li>
     </ul>
-    <a href="mailto:support@ullycoffee.com" class="footer-email">support@ullycoffee.com</a>
-    <p class="footer-copy">© 2026 Ully Coffee. All rights reserved.</p>
+    <span class="footer-right">© 2026 Ully Coffee</span>
   </footer>
 
 </body>
