@@ -17,13 +17,13 @@ const GOLD_COLOR = '#C8923C';
 
 function getFlowerSvg(size) {
   const scale = size / 200;
-  // Refined slender petal shape
-  const petalPath = "M100,100 C104,85 108,60 108,35 C108,15 104,8 100,5 C96,8 92,15 92,35 C92,60 96,85 100,100 Z";
-  const veinPath = "M100,100 L100,65"; // Shortened vein
+  // Widened base to eliminate gaps and connect petals naturally
+  const petalPath = "M100,100 C115,98 108,60 108,35 C108,15 104,8 100,5 C96,8 92,15 92,35 C92,60 85,98 100,100 Z";
+  const veinPath = "M100,100 L100,65";
   
   let content = '';
   
-  // 6 Petals with Veins (Borderless)
+  // 6 Petals with Veins (Fused at base)
   [0, 60, 120, 180, 240, 300].forEach(angle => {
     content += `
       <g transform="rotate(${angle}, 100, 100)">
@@ -32,7 +32,7 @@ function getFlowerSvg(size) {
       </g>`;
   });
 
-  // 6 Pointy Stamens - offset 30deg from petals
+  // 6 Pointy Stamens
   [30, 90, 150, 210, 270, 330].forEach(angle => {
     content += `
       <g transform="rotate(${angle}, 100, 100)">
@@ -42,10 +42,8 @@ function getFlowerSvg(size) {
 
   return `
     <g transform="scale(${scale})">
-      <circle cx="100" cy="100" r="12" fill="${PETAL_COLOR}" fill-opacity="0.1" />
       ${content}
-      <circle cx="100" cy="100" r="6" fill="${PETAL_COLOR}" />
-      <circle cx="100" cy="100" r="2.25" fill="${BG_COLOR}" />
+      <circle cx="100" cy="100" r="1.5" fill="${BG_COLOR}" fill-opacity="0.4" />
     </g>
   `;
 }
