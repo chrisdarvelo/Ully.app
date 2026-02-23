@@ -52,8 +52,8 @@ export default function CoffeeFlower({
   const gold = Colors.primary;
 
   // Narrowed 30% horizontally — avoids hexagram silhouette at small sizes
-  const petalPath = "M100,100 C121,83 134,58 100,40 C66,58 79,83 100,100 Z";
-  const veinPath = "M100,100 L100,40"; // Vein extends to petal tip
+  const petalPath = "M100,100 C108,78 110,50 100,20 C90,50 92,78 100,100 Z";
+  const veinPath = "M100,100 L100,20"; // Vein extends to petal tip
   
   return (
     <View style={[styles.container, { width: size, height: size, opacity }]}>

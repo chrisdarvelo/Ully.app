@@ -17,8 +17,8 @@ const GOLD_COLOR = '#C8923C';
 
 function getFlowerSvg(size) {
   const scale = size / 200;
-  const petalPath = "M100,100 C121,83 134,58 100,40 C66,58 79,83 100,100 Z";
-  const veinPath = "M100,100 L100,40";
+  const petalPath = "M100,100 C108,78 110,50 100,20 C90,50 92,78 100,100 Z";
+  const veinPath = "M100,100 L100,20";
   
   let content = '';
   
