@@ -19,7 +19,7 @@
 
 ## What is Ully?
 
-**Ully AI** is a mobile-first AI coffee companion built for baristas, enthusiasts, and coffee businesses. It combines a conversational AI assistant powered by Claude Sonnet, a personal recipe library, curated barista content, café bookmarking, and daily coffee news — all wrapped in a dark espresso-crema aesthetic.
+**Ully AI** is a mobile-first AI coffee companion built for enthusiasts, baristas and businesses. It combines a conversational AI assistant powered by Claude Sonnet, a personal recipe library, curated barista content, café bookmarking, and daily coffee news — all wrapped in a dark espresso-crema aesthetic.
 
 Ully helps you:
 - **Dial in** your espresso with AI-guided troubleshooting
