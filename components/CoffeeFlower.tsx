@@ -51,9 +51,9 @@ export default function CoffeeFlower({
   const strokeColor = dark ? '#3C3228' : '#FFFFFF';
   const gold = Colors.primary;
 
-  // Narrowed and elongated organic petal shape — matches real coffee blossom
+  // Narrowed and elongated organic petal shape
   const petalPath = "M100,100 C104,85 108,60 108,35 C108,15 104,8 100,5 C96,8 92,15 92,35 C92,60 96,85 100,100 Z";
-  const veinPath = "M100,100 L100,15"; // Vein extends to petal tip
+  const veinPath = "M100,100 L100,65"; // Shortened vein closer to base
   
   return (
     <View style={[styles.container, { width: size, height: size, opacity }]}>
@@ -74,51 +74,40 @@ export default function CoffeeFlower({
           {/* 6 Organic Petals */}
           {[0, 60, 120, 180, 240, 300].map((angle) => (
             <G transform={`rotate(${angle}, 100, 100)`} key={angle}>
-              {/* Petal Body */}
+              {/* Petal Body - Border removed */}
               <Path
                 d={petalPath}
                 fill="url(#petalGrad)"
-                stroke={gold}
-                strokeWidth={bold ? 1.5 : 0.8}
-                strokeOpacity={0.6}
               />
-              {/* Petal Vein */}
+              {/* Petal Vein - Subtle gold hint at base */}
               <Path
                 d={veinPath}
                 stroke={gold}
                 strokeWidth={0.5}
-                strokeOpacity={0.4}
+                strokeOpacity={0.3}
                 strokeLinecap="round"
               />
             </G>
           ))}
           
-          {/* Gold Cluster Center */}
-          <Circle cx="100" cy="100" r="12" fill={gold} fillOpacity={0.15} />
-          <Circle cx="100" cy="100" r="6" fill={gold} />
+          {/* Center Cluster - White base center */}
+          <Circle cx="100" cy="100" r="12" fill={gold} fillOpacity={0.1} />
+          <Circle cx="100" cy="100" r="6" fill={strokeColor} />
 
-          {/* Organic Stamens - 6 filaments offset from petals */}
+          {/* Organic Stamens - Pointier and smaller filaments */}
           {[30, 90, 150, 210, 270, 330].map((angle) => (
             <G transform={`rotate(${angle}, 100, 100)`} key={`stamen-${angle}`}>
-              {/* Filament stalk */}
+              {/* Pointy filament/bulb combo */}
               <Path
-                d="M100,100 Q102,85 100,72"
-                stroke={gold}
-                strokeWidth={1.5}
-                strokeLinecap="round"
-              />
-              {/* Stamen bulb/pollen head */}
-              <Circle
-                cx="100"
-                cy="72"
-                r="2.5"
+                d="M100,100 Q101,90 100,78 L101.5,75 L100,72 L98.5,75 L100,78"
                 fill={gold}
+                fillOpacity={0.9}
               />
             </G>
           ))}
 
-          {/* Dark center core */}
-          <Circle cx="100" cy="100" r="3" fill={Colors.background} />
+          {/* Dark center core - 25% smaller (3 * 0.75 = 2.25) */}
+          <Circle cx="100" cy="100" r="2.25" fill={Colors.background} />
         </Svg>
       </Animated.View>
     </View>

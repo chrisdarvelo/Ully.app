@@ -17,36 +17,35 @@ const GOLD_COLOR = '#C8923C';
 
 function getFlowerSvg(size) {
   const scale = size / 200;
-  // Refined slender petal shape to match real coffee blossom
+  // Refined slender petal shape
   const petalPath = "M100,100 C104,85 108,60 108,35 C108,15 104,8 100,5 C96,8 92,15 92,35 C92,60 96,85 100,100 Z";
-  const veinPath = "M100,100 L100,15";
+  const veinPath = "M100,100 L100,65"; // Shortened vein
   
   let content = '';
   
-  // 6 Petals with Veins
+  // 6 Petals with Veins (Borderless)
   [0, 60, 120, 180, 240, 300].forEach(angle => {
     content += `
       <g transform="rotate(${angle}, 100, 100)">
-        <path d="${petalPath}" fill="${PETAL_COLOR}" fill-opacity="0.98" stroke="${GOLD_COLOR}" stroke-width="0.8" />
-        <path d="${veinPath}" stroke="${GOLD_COLOR}" stroke-width="0.5" stroke-opacity="0.4" />
+        <path d="${petalPath}" fill="${PETAL_COLOR}" fill-opacity="0.98" />
+        <path d="${veinPath}" stroke="${GOLD_COLOR}" stroke-width="0.5" stroke-opacity="0.3" />
       </g>`;
   });
 
-  // 6 Organic Stamens - filaments with bulbs, offset 30deg from petals
+  // 6 Pointy Stamens - offset 30deg from petals
   [30, 90, 150, 210, 270, 330].forEach(angle => {
     content += `
       <g transform="rotate(${angle}, 100, 100)">
-        <path d="M100,100 Q102,85 100,72" stroke="${GOLD_COLOR}" stroke-width="1.5" stroke-linecap="round" fill="none" />
-        <circle cx="100" cy="72" r="2.5" fill="${GOLD_COLOR}" />
+        <path d="M100,100 Q101,90 100,78 L101.5,75 L100,72 L98.5,75 L100,78" fill="${GOLD_COLOR}" fill-opacity="0.9" />
       </g>`;
   });
 
   return `
     <g transform="scale(${scale})">
-      <circle cx="100" cy="100" r="12" fill="${GOLD_COLOR}" fill-opacity="0.15" />
+      <circle cx="100" cy="100" r="12" fill="${PETAL_COLOR}" fill-opacity="0.1" />
       ${content}
-      <circle cx="100" cy="100" r="6" fill="${GOLD_COLOR}" />
-      <circle cx="100" cy="100" r="3" fill="${BG_COLOR}" />
+      <circle cx="100" cy="100" r="6" fill="${PETAL_COLOR}" />
+      <circle cx="100" cy="100" r="2.25" fill="${BG_COLOR}" />
     </g>
   `;
 }
