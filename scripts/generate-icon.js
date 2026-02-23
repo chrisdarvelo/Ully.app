@@ -17,9 +17,10 @@ const GOLD_COLOR = '#C8923C';
 
 function getFlowerSvg(size) {
   const scale = size / 200;
+  const YELLOW_GOLD = '#F5B041'; // Brighter yellowish gold
   // Widened base to eliminate gaps and connect petals naturally
   const petalPath = "M100,100 C115,98 108,60 108,35 C108,15 104,8 100,5 C96,8 92,15 92,35 C92,60 85,98 100,100 Z";
-  const veinPath = "M100,100 L100,65";
+  const veinPath = "M100,100 L100,60";
   
   let content = '';
   
@@ -28,22 +29,31 @@ function getFlowerSvg(size) {
     content += `
       <g transform="rotate(${angle}, 100, 100)">
         <path d="${petalPath}" fill="${PETAL_COLOR}" fill-opacity="0.98" />
-        <path d="${veinPath}" stroke="${GOLD_COLOR}" stroke-width="0.5" stroke-opacity="0.3" />
+        <path d="${veinPath}" stroke="${YELLOW_GOLD}" stroke-width="0.5" stroke-opacity="0.4" />
       </g>`;
   });
 
-  // 6 Pointy Stamens
+  // 6 Pointy Stamens - Significantly bigger and yellow-ish
   [30, 90, 150, 210, 270, 330].forEach(angle => {
     content += `
       <g transform="rotate(${angle}, 100, 100)">
-        <path d="M100,100 Q101,90 100,78 L101.5,75 L100,72 L98.5,75 L100,78" fill="${GOLD_COLOR}" fill-opacity="0.9" />
+        <path d="M100,100 Q102,85 100,68 L103,64 L100,58 L97,64 L100,68" fill="${YELLOW_GOLD}" fill-opacity="0.95" />
       </g>`;
   });
 
   return `
+    <defs>
+      <radialGradient id="holeDepth" cx="100" cy="100" r="15" fx="100" fy="100" gradientUnits="userSpaceOnUse">
+        <stop offset="0%" stop-color="#000000" stop-opacity="0.6" />
+        <stop offset="40%" stop-color="#000000" stop-opacity="0.2" />
+        <stop offset="100%" stop-color="${PETAL_COLOR}" stop-opacity="0" />
+      </radialGradient>
+    </defs>
     <g transform="scale(${scale})">
       ${content}
-      <circle cx="100" cy="100" r="1.5" fill="${BG_COLOR}" fill-opacity="0.4" />
+      <circle cx="100" cy="100" r="15" fill="url(#holeDepth)" />
+      <circle cx="100" cy="100" r="4.2" fill="#000000" fill-opacity="0.7" />
+      <circle cx="100" cy="100" r="2.5" fill="#000000" />
     </g>
   `;
 }
