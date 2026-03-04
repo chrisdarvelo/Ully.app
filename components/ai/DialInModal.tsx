@@ -14,7 +14,7 @@ import {
 import * as Haptics from 'expo-haptics';
 import * as ImagePicker from 'expo-image-picker';
 import { Colors, Fonts } from '../../utils/constants';
-import { DialInData } from '../../types';
+import type { DialInData } from '../../types';
 import { validateImageSize } from '../../utils/mediaUtils';
 
 const { height: SCREEN_HEIGHT } = Dimensions.get('window');
@@ -87,7 +87,7 @@ export default function DialInModal({ visible, onClose, onConfirm }: Props) {
   const handleAnalyze = () => {
     if (!taste) return;
     Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
-    onConfirm({ dose, yield: yieldG, time, taste, image: photo?.base64, imageUri: photo?.uri });
+    onConfirm({ dose, yield: yieldG, time, taste, ...(photo?.base64 ? { image: photo.base64 } : {}), ...(photo?.uri ? { imageUri: photo.uri } : {}) });
     resetAll();
   };
 
@@ -110,7 +110,7 @@ export default function DialInModal({ visible, onClose, onConfirm }: Props) {
           return;
         }
       }
-      setPhoto({ base64: asset.base64 ?? undefined, uri: asset.uri });
+      setPhoto({ ...(asset.base64 ? { base64: asset.base64 } : {}), uri: asset.uri });
       Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
     } catch (e) {
       console.warn('DialIn camera error:', e);

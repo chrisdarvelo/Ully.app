@@ -1,6 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { auth } from './FirebaseConfig';
-import { UserProfile } from '../types';
+import type { UserProfile } from '../types';
 
 const KEY_PREFIX = '@ully_profile_';
 

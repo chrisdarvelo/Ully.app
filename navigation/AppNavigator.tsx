@@ -3,9 +3,9 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Colors, AuthColors, Fonts } from '../utils/constants';
 import { TabIcon } from '../components/NavigationIcons';
-import { Recipe, Barista, Cafe } from '../types';
+import type { Recipe, Barista, Cafe } from '../types';
 
-// Screens
+// Screens — consumer
 import HomeScreen from '../screens/HomeScreen';
 import AIScreen from '../screens/AIScreen';
 import SettingsScreen from '../screens/SettingsScreen';
@@ -17,6 +17,8 @@ import LoginScreen from '../screens/LoginScreen';
 import SignUpScreen from '../screens/SignUpScreen';
 import PrivacyPolicyScreen from '../screens/PrivacyPolicyScreen';
 import OnboardingScreen from '../screens/OnboardingScreen';
+
+// ── Param lists ───────────────────────────────────────────────────────────────
 
 export type RootStackParamList = {
   Welcome: undefined;
@@ -36,9 +38,13 @@ export type TabParamList = {
   Profile: undefined;
 };
 
+// ── Navigators ────────────────────────────────────────────────────────────────
+
 const AuthStack = createNativeStackNavigator<RootStackParamList>();
 const AppStack = createNativeStackNavigator<RootStackParamList>();
 const Tab = createBottomTabNavigator<TabParamList>();
+
+// ── Consumer tab bar icons ─────────────────────────────────────────────────────
 
 export function AuthNavigator() {
   return (
@@ -51,7 +57,11 @@ export function AuthNavigator() {
       <AuthStack.Screen name="Welcome" component={WelcomeScreen} />
       <AuthStack.Screen name="Login" component={LoginScreen} />
       <AuthStack.Screen name="SignUp" component={SignUpScreen} />
-      <AuthStack.Screen name="PrivacyPolicy" component={PrivacyPolicyScreen} options={{ title: 'Privacy Policy' }} />
+      <AuthStack.Screen
+        name="PrivacyPolicy"
+        component={PrivacyPolicyScreen}
+        options={{ title: 'Privacy Policy' }}
+      />
     </AuthStack.Navigator>
   );
 }
@@ -81,7 +91,10 @@ function TabNavigator() {
   );
 }
 
+// ── App Navigator ─────────────────────────────────────────────────────────────
+
 export function AppNavigator({ onboarded }: { onboarded: boolean }) {
+
   return (
     <AppStack.Navigator
       initialRouteName={onboarded ? 'Tabs' : 'Onboarding'}

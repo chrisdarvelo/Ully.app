@@ -95,6 +95,61 @@ export interface UserProfile {
   shops?: string[];
 }
 
+// ── Business / Organization types ───────────────────────────────────────────
+
+export interface Machine {
+  id: string;
+  name: string;
+  type: 'espresso_machine' | 'grinder' | 'water_treatment' | 'other';
+  brand?: string;
+  model?: string;
+  serialNumber?: string;
+  location?: string;
+  installedAt?: string;
+  notes?: string;
+}
+
+export type ServiceType =
+  | 'group_service' | 'boiler_flush' | 'descale'
+  | 'gasket_replacement' | 'grinder_calibration' | 'custom';
+
+export interface ServiceRecord {
+  id: string;
+  machineId: string;
+  serviceType: ServiceType;
+  completedAt: string;
+  technicianName?: string;
+  notes: string;
+  partsReplaced?: string[];
+  nextDueAt?: string;
+}
+
+export interface TeamMember {
+  id: string;
+  name: string;
+  role: 'barista' | 'head_barista' | 'manager';
+  startDate?: string;
+  linkedUid?: string;
+  avatarUri?: string;
+}
+
+export type DrillType =
+  | 'espresso_workflow' | 'milk_texture' | 'cupping'
+  | 'latte_art' | 'customer_service' | 'custom';
+
+export interface TrainingSession {
+  id: string;
+  memberId: string;
+  createdAt: string;
+  drillType: DrillType;
+  durationMinutes: number;
+  focusArea: string;
+  selfScore: 1 | 2 | 3 | 4 | 5;
+  managerScore?: 1 | 2 | 3 | 4 | 5;
+  notes: string;
+  tags: string[];
+}
+
 export interface NotificationPrefs {
   enabled: boolean;
   dailyTip: boolean;

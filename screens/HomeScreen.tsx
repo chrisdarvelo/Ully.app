@@ -9,10 +9,11 @@ import {
   RefreshControl,
   Image,
 } from 'react-native';
-import { useNavigation, CompositeNavigationProp } from '@react-navigation/native';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { BottomTabNavigationProp } from '@react-navigation/bottom-tabs';
-import { RootStackParamList, TabParamList } from '../navigation/AppNavigator';
+import { useNavigation } from '@react-navigation/native';
+import type { CompositeNavigationProp } from '@react-navigation/native';
+import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import type { BottomTabNavigationProp } from '@react-navigation/bottom-tabs';
+import type { RootStackParamList, TabParamList } from '../navigation/AppNavigator';
 import { auth } from '../services/FirebaseConfig';
 import { getProfile } from '../services/ProfileService';
 import { getNews } from '../services/NewsService';
@@ -28,7 +29,7 @@ import SideDrawer from '../components/SideDrawer';
 import { GoldGradient } from '../components/GoldGradient';
 import HomeSkeleton from '../components/HomeSkeleton';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
-import { Recipe, Barista, Cafe, NewsArticle, BlogPost } from '../types';
+import type { Recipe, Barista, Cafe, NewsArticle, BlogPost } from '../types';
 
 const CARD_WIDTH = 150;
 const CARD_HEIGHT = 200;
@@ -55,7 +56,7 @@ export default function HomeScreen() {
   const navigation = useNavigation<HomeNavigationProp>();
   const queryClient = useQueryClient();
   const user = auth.currentUser;
-  const name = user?.email ? user.email.split('@')[0] : 'barista';
+  const name = user?.email ? (user.email.split('@')[0] ?? 'barista') : 'barista';
   const uid = user?.uid;
 
   const [drawerOpen, setDrawerOpen] = useState(false);

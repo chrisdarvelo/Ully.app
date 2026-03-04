@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
-import { View, Animated, StyleSheet, ViewStyle } from 'react-native';
+import { View, Animated, StyleSheet } from 'react-native';
+import type { ViewStyle } from 'react-native';
 import { Colors } from '../utils/constants';
 
 interface SkeletonProps {
@@ -40,7 +41,7 @@ export function Skeleton({ width, height, borderRadius = 4, style }: SkeletonPro
     <Animated.View
       style={[
         styles.skeleton,
-        { width, height, borderRadius, opacity },
+        { width: width as any, height: height as any, borderRadius, opacity },
         style,
       ]}
     />

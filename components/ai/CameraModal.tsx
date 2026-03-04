@@ -8,11 +8,11 @@ import {
 } from 'react-native';
 import { CameraView } from 'expo-camera';
 import { Fonts } from '../../utils/constants';
-import { CameraMode } from '../../hooks/useCamera';
+import type { CameraMode } from '../../hooks/useCamera';
 
 interface CameraModalProps {
   visible: boolean;
-  cameraRef: React.RefObject<CameraView>;
+  cameraRef: React.RefObject<CameraView | null>;
   recording: boolean;
   cameraMode: CameraMode;
   onClose: () => void;

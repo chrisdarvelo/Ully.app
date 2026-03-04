@@ -24,7 +24,7 @@ const MONTHS = [
 
 const MIN_AGE = 13;
 
-function getAge(year, month, day) {
+function getAge(year: number, month: number, day: number) {
   const today = new Date();
   const birthDate = new Date(year, month - 1, day);
   let age = today.getFullYear() - birthDate.getFullYear();
@@ -35,7 +35,7 @@ function getAge(year, month, day) {
   return age;
 }
 
-export default function SignUpScreen({ navigation }) {
+export default function SignUpScreen({ navigation }: { navigation: any }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -109,11 +109,12 @@ export default function SignUpScreen({ navigation }) {
       );
     } catch (error) {
       let message = 'An error occurred. Please try again.';
-      if (error.code === 'auth/email-already-in-use') {
+      const errorCode = (error as any)?.code;
+      if (errorCode === 'auth/email-already-in-use') {
         message = 'An account with this email already exists.';
-      } else if (error.code === 'auth/invalid-email') {
+      } else if (errorCode === 'auth/invalid-email') {
         message = 'Please enter a valid email address.';
-      } else if (error.code === 'auth/weak-password') {
+      } else if (errorCode === 'auth/weak-password') {
         message = 'Password is too weak. Use at least 6 characters.';
       }
       Alert.alert('Sign Up Failed', message);

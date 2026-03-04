@@ -1,7 +1,12 @@
-import { initializeApp, getApps, FirebaseApp } from 'firebase/app';
-import { initializeAuth, getReactNativePersistence, Auth } from 'firebase/auth';
+import { initializeApp, getApps } from 'firebase/app';
+import type { FirebaseApp } from 'firebase/app';
+import { initializeAuth } from 'firebase/auth';
+import type { Auth } from 'firebase/auth';
+// @ts-expect-error getReactNativePersistence is available at runtime via the react-native export condition
+import { getReactNativePersistence } from '@firebase/auth/dist/rn/index.rn';
 import { initializeAppCheck, ReCaptchaEnterpriseProvider } from 'firebase/app-check';
-import { getFunctions, Functions } from 'firebase/functions';
+import { getFunctions } from 'firebase/functions';
+import type { Functions } from 'firebase/functions';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Constants from 'expo-constants';
 
@@ -14,7 +19,7 @@ const firebaseConfig = {
   appId: Constants.expoConfig?.extra?.firebaseAppId as string,
 };
 
-const app: FirebaseApp = getApps().length === 0 ? initializeApp(firebaseConfig) : getApps()[0];
+const app: FirebaseApp = getApps().length === 0 ? initializeApp(firebaseConfig) : getApps()[0]!;
 const auth: Auth = initializeAuth(app, {
   persistence: getReactNativePersistence(AsyncStorage),
 });

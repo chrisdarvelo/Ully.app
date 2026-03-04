@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { UserProfile } from '../types';
+import type { UserProfile } from '../types';
 import { getProfile, saveProfile, isOnboarded } from '../services/ProfileService';
 
 interface ProfileState {

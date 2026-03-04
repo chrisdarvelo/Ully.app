@@ -239,6 +239,10 @@ All stored in `UserProfile` via `ProfileService` → AsyncStorage.
 | Cafes | AsyncStorage | `@ully_cafes_{uid}` |
 | Barista follows | AsyncStorage | `@ully_barista_follows_{uid}` |
 | Chat history | AsyncStorage | `@ully_chat_history` |
+| Machines | AsyncStorage | `@ully_machines_{uid}` |
+| Service records | AsyncStorage | `@ully_service_records_{uid}` |
+| Team members | AsyncStorage | `@ully_team_members_{uid}` |
+| Training logs | AsyncStorage | `@ully_training_logs_{uid}` |
 | Auth session | Firebase Auth SDK | managed |
 | Claude API key | Firebase Secret Manager | `CLAUDE_API_KEY` |
 
@@ -253,6 +257,10 @@ All stored in `UserProfile` via `ProfileService` → AsyncStorage.
 @ully_cafes_migrated_{uid}
 @ully_barista_follows_{uid}
 @ully_chat_history
+@ully_machines_{uid}
+@ully_service_records_{uid}
+@ully_team_members_{uid}
+@ully_training_logs_{uid}
 ```
 
 ---

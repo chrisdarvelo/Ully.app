@@ -9,7 +9,7 @@ import {
 import { Colors, AuthColors, Fonts } from '../../utils/constants';
 import { GoldGradient } from '../GoldGradient';
 import PaperBackground from '../PaperBackground';
-import { ChatHistoryEntry } from '../../types';
+import type { ChatHistoryEntry } from '../../types';
 
 interface ChatHistoryProps {
   visible: boolean;

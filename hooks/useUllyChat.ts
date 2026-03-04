@@ -1,9 +1,10 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import ClaudeService from '../services/ClaudeService';
-import { getWeatherAndLocation, WeatherContext } from '../services/WeatherLocationService';
+import { getWeatherAndLocation } from '../services/WeatherLocationService';
+import type { WeatherContext } from '../services/WeatherLocationService';
 import { auth } from '../services/FirebaseConfig';
-import { ChatMessage, ChatHistoryEntry } from '../types';
+import type { ChatMessage, ChatHistoryEntry } from '../types';
 
 const MAX_HISTORY = 50;
 
@@ -98,13 +99,13 @@ export function useUllyChat() {
     const entry: ChatHistoryEntry = {
       id: Date.now().toString(),
       preview: preview.length > 50 ? preview.slice(0, 50) + '...' : preview,
-      date: new Date().toISOString().split('T')[0],
+      date: new Date().toISOString().split('T')[0] ?? '',
       messages: msgs.map((m) => ({
         role: m.role,
         text: m.text,
-        imageUri: m.imageUri,
+        ...(m.imageUri ? { imageUri: m.imageUri } : {}),
         isVideo: !!(m.frames && m.frames.length > 0),
-      })),
+      })) as ChatMessage[],
     };
     
     setHistory((prev) => {

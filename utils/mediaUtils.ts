@@ -26,7 +26,7 @@ export async function extractFrames(videoUri: string, count = 5, durationMs = 10
         quality: 0.7,
       });
       const base64 = await FileSystem.readAsStringAsync(uri, {
-        encoding: FileSystem.EncodingType.Base64,
+        encoding: 'base64',
       });
       frames.push(base64);
     } catch {

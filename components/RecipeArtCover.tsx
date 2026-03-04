@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 import { View } from 'react-native';
 import Svg, { Rect, Path, Circle, Ellipse, Line } from 'react-native-svg';
 
-function seededRandom(seed) {
+function seededRandom(seed: number) {
   let s = seed;
   return () => {
     s = (s * 16807 + 0) % 2147483647;
@@ -11,7 +11,7 @@ function seededRandom(seed) {
 }
 
 // Coffee Plant — branches, leaves, and cherries
-function generatePlant(rand, w, h) {
+function generatePlant(rand: () => number, w: number, h: number) {
   const leafGreen = ['#2D6A4F', '#40916C', '#52B788', '#74C69D', '#95D5B2'];
   const cherryRed = ['#D62828', '#E63946', '#C1121F', '#A4161A'];
   const elements = [];
@@ -54,7 +54,7 @@ function generatePlant(rand, w, h) {
     const cp1y = by + leafLen * 0.3 * Math.sin(rad) - leafW * Math.cos(rad) * side;
     const cp2x = bx + leafLen * 0.3 * Math.cos(rad) * side - leafW * Math.sin(rad);
     const cp2y = by + leafLen * 0.3 * Math.sin(rad) + leafW * Math.cos(rad) * side;
-    const color = leafGreen[Math.floor(rand() * leafGreen.length)];
+    const color = leafGreen[Math.floor(rand() * leafGreen.length)] ?? '';
 
     elements.push(
       <Path
@@ -88,7 +88,7 @@ function generatePlant(rand, w, h) {
     const ox = (rand() - 0.5) * 20;
     const oy = rand() * 15 + 5;
     const r = 3 + rand() * 4;
-    const color = cherryRed[Math.floor(rand() * cherryRed.length)];
+    const color = cherryRed[Math.floor(rand() * cherryRed.length)] ?? '';
 
     elements.push(
       <Circle key={`cherry-${i}`} cx={bx + ox} cy={by + oy} r={r} fill={color} opacity={0.8 + rand() * 0.2} />
@@ -103,7 +103,7 @@ function generatePlant(rand, w, h) {
 }
 
 // Processing — drying beds, washed, natural, fermentation tanks
-function generateProcessing(rand, w, h) {
+function generateProcessing(rand: () => number, w: number, h: number) {
   const elements = [];
 
   // Warm earth background
@@ -133,7 +133,7 @@ function generateProcessing(rand, w, h) {
     const bx = w * 0.12 + rand() * w * 0.76;
     const by = bedY + rand() * bedH;
     const r = 2 + rand() * 3;
-    const color = beanColors[Math.floor(rand() * beanColors.length)];
+    const color = beanColors[Math.floor(rand() * beanColors.length)] ?? '';
     elements.push(
       <Ellipse key={`bean-${i}`} cx={bx} cy={by} rx={r} ry={r * 0.65} fill={color} opacity={0.7 + rand() * 0.3} />
     );
@@ -169,7 +169,7 @@ function generateProcessing(rand, w, h) {
 }
 
 // Roasting — drum roaster, beans in stages
-function generateRoasting(rand, w, h) {
+function generateRoasting(rand: () => number, w: number, h: number) {
   const elements = [];
 
   // Dark warm background
@@ -199,7 +199,7 @@ function generateRoasting(rand, w, h) {
     const bx = drumCX + rx * Math.cos(angle);
     const by = drumCY + ry * Math.sin(angle);
     const br = 2.5 + rand() * 3;
-    const color = roastColors[Math.floor(rand() * roastColors.length)];
+    const color = roastColors[Math.floor(rand() * roastColors.length)] ?? '';
 
     elements.push(
       <Ellipse key={`rb-${i}`} cx={bx} cy={by} rx={br} ry={br * 0.7} fill={color} opacity={0.8 + rand() * 0.2} />
@@ -243,7 +243,7 @@ function generateRoasting(rand, w, h) {
 }
 
 // Terroir — hillside landscape, soil layers, farm rows
-function generateTerroir(rand, w, h) {
+function generateTerroir(rand: () => number, w: number, h: number) {
   const elements = [];
 
   // Sky
@@ -255,7 +255,7 @@ function generateTerroir(rand, w, h) {
     const hY = h * (0.3 + i * 0.15);
     const cp1 = w * (0.2 + rand() * 0.2);
     const cp2 = w * (0.6 + rand() * 0.2);
-    const color = hillColors[i % hillColors.length];
+    const color = hillColors[i % hillColors.length] ?? '';
     elements.push(
       <Path
         key={`hill-${i}`}
@@ -301,7 +301,7 @@ function generateTerroir(rand, w, h) {
 }
 
 // Harvest — hands picking, baskets, bright farm day
-function generateHarvest(rand, w, h) {
+function generateHarvest(rand: () => number, w: number, h: number) {
   const elements = [];
 
   // Golden hour sky
@@ -329,7 +329,7 @@ function generateHarvest(rand, w, h) {
     const cy = basketY - 2 - rand() * 6;
     const r = 2 + rand() * 3;
     elements.push(
-      <Circle key={`bc-${i}`} cx={cx} cy={cy} r={r} fill={cherryColors[Math.floor(rand() * cherryColors.length)]} opacity={0.8} />
+      <Circle key={`bc-${i}`} cx={cx} cy={cy} r={r} fill={cherryColors[Math.floor(rand() * cherryColors.length)] ?? ''} opacity={0.8} />
     );
   }
 
@@ -347,7 +347,9 @@ function generateHarvest(rand, w, h) {
   return elements;
 }
 
-const GENERATORS = {
+type GeneratorKey = 'plant' | 'processing' | 'roasting' | 'terroir' | 'harvest';
+
+const GENERATORS: Record<GeneratorKey, (rand: () => number, w: number, h: number) => React.ReactElement[]> = {
   plant: generatePlant,
   processing: generateProcessing,
   roasting: generateRoasting,
@@ -355,15 +357,15 @@ const GENERATORS = {
   harvest: generateHarvest,
 };
 
-const STYLE_KEYS = Object.keys(GENERATORS);
+const STYLE_KEYS = Object.keys(GENERATORS) as GeneratorKey[];
 
-export default function RecipeArtCover({ artSeed = 1, artStyle, size = 120 }) {
+export default function RecipeArtCover({ artSeed = 1, artStyle, size = 120 }: { artSeed?: number; artStyle?: string; size?: number }) {
   const elements = useMemo(() => {
     const rand = seededRandom(artSeed);
     // Pick style from seed if not specified, cycling through farm styles
-    const style = artStyle && GENERATORS[artStyle]
-      ? artStyle
-      : STYLE_KEYS[artSeed % STYLE_KEYS.length];
+    const style: GeneratorKey = (artStyle && artStyle in GENERATORS)
+      ? artStyle as GeneratorKey
+      : (STYLE_KEYS[artSeed % STYLE_KEYS.length] ?? 'plant');
     const generator = GENERATORS[style];
     return generator(rand, size, size);
   }, [artSeed, artStyle, size]);

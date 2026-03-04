@@ -1,5 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { NewsArticle } from '../types';
+import type { NewsArticle } from '../types';
 
 const CACHE_KEY = '@ully_blogs_cache';
 const CACHE_TTL = 24 * 60 * 60 * 1000; // 24 hours
@@ -15,7 +15,7 @@ function parseItems(xml: string, source: string): NewsArticle[] {
   const itemRegex = /<item>([\s\S]*?)<\/item>/g;
   let match;
   while ((match = itemRegex.exec(xml)) !== null) {
-    const block = match[1];
+    const block = match[1] ?? '';
     const title = block.match(/<title><!\[CDATA\[(.*?)\]\]><\/title>/)?.[1]
       || block.match(/<title>(.*?)<\/title>/)?.[1]
       || '';

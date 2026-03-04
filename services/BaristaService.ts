@@ -1,5 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { Barista, BlogPost } from '../types';
+import type { Barista, BlogPost } from '../types';
 
 const FOLLOW_KEY_PREFIX = '@ully_barista_follows_';
 
@@ -150,7 +150,7 @@ export async function getFollowedBlogPosts(uid: string): Promise<BlogPost[]> {
         title: blog.title,
         url: blog.url,
         source: barista.name,
-        baristaAvatarUrl: barista.avatarUrl,
+        ...(barista.avatarUrl ? { baristaAvatarUrl: barista.avatarUrl } : {}),
         baristaAvatarColor: barista.avatarColor,
         baristaId: barista.id,
       });

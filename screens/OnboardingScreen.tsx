@@ -16,14 +16,14 @@ import { Colors, AuthColors, Fonts } from '../utils/constants';
 import PaperBackground from '../components/PaperBackground';
 import CoffeeFlower from '../components/CoffeeFlower';
 import { GoldButton, GoldGradient } from '../components/GoldGradient';
-import { UserRole, UserProfile } from '../types';
+import type { UserRole, UserProfile } from '../types';
 
 const USERNAME_REGEX = /^[a-zA-Z0-9_]{3,20}$/;
 
 const ROLES: { key: UserRole; emoji: string; name: string; tagline: string }[] = [
   { key: 'consumer', emoji: '☕', name: 'Consumer', tagline: 'Coffee lover' },
   { key: 'barista', emoji: '🎨', name: 'Barista', tagline: 'Coffee professional' },
-  { key: 'organization', emoji: '🏢', name: 'Organization', tagline: 'Business account' },
+  { key: 'organization', emoji: '🏢', name: 'Business Owner', tagline: 'Manage your café or roastery' },
 ];
 
 const QUESTIONS: Record<UserRole, any[]> = {
@@ -114,7 +114,7 @@ const QUESTIONS: Record<UserRole, any[]> = {
 const COMPLETION_SUBTITLES: Record<UserRole, string> = {
   consumer: 'Your personalized coffee feed is ready.',
   barista: 'Your professional workspace is ready.',
-  organization: 'Your business dashboard is ready.',
+  organization: 'Your coffee workspace is ready.',
 };
 
 export default function OnboardingScreen({ navigation }: { navigation: any }) {
@@ -151,10 +151,10 @@ export default function OnboardingScreen({ navigation }: { navigation: any }) {
   const handleFinish = async () => {
     if (!user || !role) return;
     setSaving(true);
-    const tierMap: Record<UserRole, 'free' | 'pro' | 'business'> = { 
-      consumer: 'free', 
-      barista: 'free', 
-      organization: 'free' 
+    const tierMap: Record<UserRole, 'free' | 'pro' | 'business'> = {
+      consumer: 'free',
+      barista: 'free',
+      organization: 'business',
     };
     try {
       await saveProfile(user.uid, {

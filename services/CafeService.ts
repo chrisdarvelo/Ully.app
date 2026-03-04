@@ -1,6 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { getProfile } from './ProfileService';
-import { Cafe } from '../types';
+import type { Cafe } from '../types';
 
 const KEY_PREFIX = '@ully_cafes_';
 const MIGRATED_KEY = '@ully_cafes_migrated_';
@@ -50,9 +50,9 @@ export async function addCafe(uid: string, cafe: Partial<Cafe>): Promise<Cafe[]>
   const newCafe: Cafe = {
     id: cafe.id || `cafe_${Date.now()}`,
     name: cafe.name || '',
-    location: cafe.location || '',
-    notes: cafe.notes || '',
     addedAt: new Date().toISOString(),
+    ...(cafe.location !== undefined ? { location: cafe.location } : { location: '' }),
+    ...(cafe.notes !== undefined ? { notes: cafe.notes } : { notes: '' }),
   };
   cafes.push(newCafe);
   await AsyncStorage.setItem(cafeKey(uid), JSON.stringify(cafes));
@@ -62,8 +62,8 @@ export async function addCafe(uid: string, cafe: Partial<Cafe>): Promise<Cafe[]>
 export async function saveCafe(uid: string, cafe: Partial<Cafe> & { id: string }): Promise<Cafe[]> {
   const cafes = await getCafes(uid);
   const index = cafes.findIndex((c) => c.id === cafe.id);
-  if (index >= 0) {
-    cafes[index] = { ...cafes[index], ...cafe };
+  if (index >= 0 && cafes[index]) {
+    cafes[index] = { ...cafes[index]!, ...cafe } as Cafe;
   }
   await AsyncStorage.setItem(cafeKey(uid), JSON.stringify(cafes));
   return cafes;

@@ -35,23 +35,23 @@ import { Colors, AuthColors, Fonts } from '../utils/constants';
 import { sanitizeText } from '../utils/validation';
 import CoffeeFlower from '../components/CoffeeFlower';
 import { GoldGradient } from '../components/GoldGradient';
-import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
-import { TabParamList } from '../navigation/AppNavigator';
+import type { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
+import type { TabParamList } from '../navigation/AppNavigator';
 
 type Props = BottomTabScreenProps<TabParamList, 'Profile'>;
 
 export default function SettingsScreen({ navigation: tabNav }: Props) {
-  const navigation = tabNav.getParent();
+  const navigation = tabNav.getParent()!;
   const user = auth.currentUser;
-  const name = user?.email ? user.email.split('@')[0] : 'User';
+  const name = user?.email ? (user.email.split('@')[0] ?? 'User') : 'User';
   const [loading, setLoading] = useState(false);
   const [editing, setEditing] = useState(false);
   const [deleteModalVisible, setDeleteModalVisible] = useState(false);
   const [deletePassword, setDeletePassword] = useState('');
   const [location, setLocation] = useState('');
-  const [shops, setShops] = useState([]);
+  const [shops, setShops] = useState<string[]>([]);
   const [shopInput, setShopInput] = useState('');
-  const [avatarUri, setAvatarUri] = useState(null);
+  const [avatarUri, setAvatarUri] = useState<string | null>(null);
   const [notifEnabled, setNotifEnabled] = useState(false);
 
   const loadProfile = useCallback(async () => {
@@ -118,7 +118,7 @@ export default function SettingsScreen({ navigation: tabNav }: Props) {
   };
 
   const confirmDelete = async () => {
-    if (!deletePassword) return;
+    if (!deletePassword || !user || !user.email) return;
     setDeleteModalVisible(false);
     setLoading(true);
     try {
@@ -128,7 +128,7 @@ export default function SettingsScreen({ navigation: tabNav }: Props) {
       // deleting the Auth record, otherwise local data is orphaned.
       try {
         const keys = await AsyncStorage.getAllKeys();
-        const userKeys = keys.filter((k) => k.includes(user.uid));
+        const userKeys = keys.filter((k) => k.includes(user!.uid));
         if (userKeys.length > 0) {
           await AsyncStorage.multiRemove(userKeys);
         }
@@ -141,15 +141,16 @@ export default function SettingsScreen({ navigation: tabNav }: Props) {
       await deleteUserAccount();
     } catch (error) {
       setLoading(false);
+      const errorCode = (error as any)?.code;
       const msg =
-        error.code === 'auth/wrong-password' || error.code === 'auth/invalid-credential'
+        errorCode === 'auth/wrong-password' || errorCode === 'auth/invalid-credential'
           ? 'Incorrect password. Please try again.'
           : 'Failed to delete account. Please try again.';
       Alert.alert('Error', msg);
     }
   };
 
-  const handleToggleNotifications = async (value) => {
+  const handleToggleNotifications = async (value: boolean) => {
     if (value) {
       const token = await registerForPushNotifications();
       if (!token) {
@@ -163,6 +164,7 @@ export default function SettingsScreen({ navigation: tabNav }: Props) {
   };
 
   const handleSaveProfile = async () => {
+    if (!user) return;
     try {
       await saveProfile(user.uid, {
         location: sanitizeText(location, 100),
@@ -182,12 +184,12 @@ export default function SettingsScreen({ navigation: tabNav }: Props) {
     }
   };
 
-  const removeShop = (index) => {
+  const removeShop = (index: number) => {
     setShops(shops.filter((_, i) => i !== index));
   };
 
-  const saveAvatar = async (result) => {
-    if (!result.canceled && result.assets?.[0]) {
+  const saveAvatar = async (result: ImagePicker.ImagePickerResult) => {
+    if (!result.canceled && result.assets?.[0] && user) {
       const uri = result.assets[0].uri;
       setAvatarUri(uri);
       await saveProfile(user.uid, { avatarUri: uri });
@@ -195,10 +197,10 @@ export default function SettingsScreen({ navigation: tabNav }: Props) {
   };
 
   const pickAvatar = () => {
-    const opts = {
-      mediaTypes: ['images'],
+    const opts: ImagePicker.ImagePickerOptions = {
+      mediaTypes: ['images' as ImagePicker.MediaType],
       allowsEditing: true,
-      aspect: [1, 1],
+      aspect: [1, 1] as [number, number],
       quality: 0.7,
     };
     Alert.alert('Profile Photo', 'Choose an option', [

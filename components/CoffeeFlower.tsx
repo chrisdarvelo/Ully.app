@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { Animated, View, StyleSheet } from 'react-native';
-import Svg, { Path, Circle, G, Defs, LinearGradient, Stop } from 'react-native-svg';
+import Svg, { Path, Circle, G, Defs, LinearGradient, RadialGradient, Stop } from 'react-native-svg';
 import { Colors } from '../utils/constants';
 
 interface CoffeeFlowerProps {

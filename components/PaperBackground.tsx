@@ -3,7 +3,7 @@ import { View, StyleSheet } from 'react-native';
 import Svg, { Rect, Path, Line, Polygon } from 'react-native-svg';
 import { Colors } from '../utils/constants';
 
-function seededRandom(seed) {
+function seededRandom(seed: number) {
   let s = seed;
   return () => {
     s = (s * 16807 + 0) % 2147483647;
@@ -11,7 +11,7 @@ function seededRandom(seed) {
   };
 }
 
-export default function PaperBackground({ children }) {
+export default function PaperBackground({ children }: { children: React.ReactNode }) {
   const { creases, shadows, fibers } = useMemo(() => {
     const rand = seededRandom(42);
     const W = 420;

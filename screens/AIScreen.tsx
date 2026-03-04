@@ -22,14 +22,15 @@ import { GoldGradient } from '../components/GoldGradient';
 import CoffeeFlower from '../components/CoffeeFlower';
 import PaperBackground from '../components/PaperBackground';
 import { useUllyChat } from '../hooks/useUllyChat';
-import { useCamera, CameraMode } from '../hooks/useCamera';
+import { useCamera } from '../hooks/useCamera';
+import type { CameraMode } from '../hooks/useCamera';
 import { extractFrames, validateImageSize } from '../utils/mediaUtils';
 import CameraModal from '../components/ai/CameraModal';
 import ChatHistory from '../components/ai/ChatHistory';
 import ActionChips from '../components/ai/ActionChips';
 import DialInModal from '../components/ai/DialInModal';
 import { MicIcon, BookIcon, FlagIcon } from '../components/ai/AIIcons';
-import { DialInData } from '../types';
+import type { DialInData } from '../types';
 
 // Speech Recognition (Keep inline for safe optional require)
 let ExpoSpeechRecognitionModule: any = null;
@@ -111,10 +112,10 @@ export default function AIScreen() {
       return;
     }
     thinkingIndexRef.current = Math.floor(Math.random() * THINKING_QUOTES.length);
-    setThinkingQuote(THINKING_QUOTES[thinkingIndexRef.current]);
+    setThinkingQuote(THINKING_QUOTES[thinkingIndexRef.current] ?? '');
     const interval = setInterval(() => {
       thinkingIndexRef.current = (thinkingIndexRef.current + 1) % THINKING_QUOTES.length;
-      setThinkingQuote(THINKING_QUOTES[thinkingIndexRef.current]);
+      setThinkingQuote(THINKING_QUOTES[thinkingIndexRef.current] ?? '');
     }, 2500);
     return () => clearInterval(interval);
   }, [loading]);
@@ -124,14 +125,14 @@ export default function AIScreen() {
 
   // Speech Logic
   useSpeechRecognitionEvent('result', (event: any) => {
-    const transcript = event.results[0]?.transcript;
+    const transcript: string | undefined = event.results[0]?.transcript;
     if (transcript) {
-      setQuery(transcript);
+      setQuery(transcript ?? '');
       if (event.isFinal) {
         setListening(false);
         Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
         // Auto-submit voice queries
-        handleVoiceSubmit(transcript);
+        handleVoiceSubmit(transcript ?? '');
       }
     }
   });
@@ -264,7 +265,7 @@ export default function AIScreen() {
           const promptText = mode === 'scan'
             ? 'Identify this coffee equipment part. Provide: part name, manufacturer/model compatibility, what it does, signs of wear or damage, recommended replacement part numbers, and where to source it.'
             : 'Analyze this espresso extraction image. Provide: what you observe, potential issues, recommended fixes or adjustments, and any parts that may need replacement. Be specific and actionable.';
-          await addMessage({ role: 'user', text: promptText, image: asset.base64 || undefined, imageUri: asset.uri });
+          await addMessage({ role: 'user', text: promptText, ...(asset.base64 ? { image: asset.base64 } : {}), imageUri: asset.uri });
         }
       }
     } catch (error) {
@@ -290,7 +291,7 @@ export default function AIScreen() {
       ? " I've attached a photo of the shot — look for crema color, channeling, and extraction patterns."
       : '';
     const text = `Dial-in: ${data.dose.toFixed(1)}g dose → ${data.yield.toFixed(1)}g yield in ${data.time}s. Tasted ${tasteMap[data.taste]}.${visualNote} What grind or technique adjustments do I need?`;
-    await addMessage({ role: 'user', text, image: data.image, imageUri: data.imageUri });
+    await addMessage({ role: 'user', text, ...(data.image ? { image: data.image } : {}), ...(data.imageUri ? { imageUri: data.imageUri } : {}) });
     setTimeout(() => scrollRef.current?.scrollToEnd({ animated: true }), 100);
   };
 

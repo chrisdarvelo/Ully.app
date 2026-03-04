@@ -14,7 +14,7 @@ import { Colors, AuthColors, Fonts } from '../utils/constants';
 import { sanitizeText } from '../utils/validation';
 import { GoldGradient } from '../components/GoldGradient';
 
-export default function CafeDetailScreen({ route, navigation }) {
+export default function CafeDetailScreen({ route, navigation }: { route: any; navigation: any }) {
   const cafe = route.params?.cafe;
   const isNew = route.params?.isNew;
   const uid = auth.currentUser?.uid;
@@ -53,6 +53,7 @@ export default function CafeDetailScreen({ route, navigation }) {
         text: 'Remove',
         style: 'destructive',
         onPress: async () => {
+          if (!uid) return;
           await removeCafe(uid, cafe.id);
           navigation.goBack();
         },

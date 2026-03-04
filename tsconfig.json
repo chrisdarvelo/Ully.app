@@ -1,6 +1,5 @@
 {
   "compilerOptions": {
-    "module": "nodenext",
     "target": "esnext",
     "types": [],
     "sourceMap": true,
@@ -9,12 +8,11 @@
     "noUncheckedIndexedAccess": true,
     "exactOptionalPropertyTypes": true,
     "strict": true,
-    "jsx": "react-jsx",
     "verbatimModuleSyntax": true,
     "isolatedModules": true,
     "noUncheckedSideEffectImports": true,
-    "moduleDetection": "force",
     "skipLibCheck": true
   },
-  "extends": "expo/tsconfig.base"
+  "extends": "expo/tsconfig.base",
+  "exclude": ["node_modules", "__tests__", "jest.setup.ts", "babel.config.js", "metro.config.js"]
 }

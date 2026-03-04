@@ -13,10 +13,10 @@ import { AuthColors, Fonts } from '../utils/constants';
 import CoffeeFlower from '../components/CoffeeFlower';
 import { GoldButton } from '../components/GoldGradient';
 
-export default function VerifyEmailScreen({ onVerified }) {
+export default function VerifyEmailScreen({ onVerified }: { onVerified: () => void }) {
   const [loading, setLoading] = useState(false);
   const [polling, setPolling] = useState(true);
-  const intervalRef = useRef(null);
+  const intervalRef = useRef<ReturnType<typeof setInterval> | undefined>(undefined);
 
   useEffect(() => {
     intervalRef.current = setInterval(async () => {
@@ -38,10 +38,12 @@ export default function VerifyEmailScreen({ onVerified }) {
   const handleResend = async () => {
     setLoading(true);
     try {
+      if (!auth.currentUser) return;
       await sendEmailVerification(auth.currentUser);
       Alert.alert('Email Sent', 'A new verification email has been sent. Check your inbox.');
     } catch (error) {
-      if (error.code === 'auth/too-many-requests') {
+      const errorCode = (error as any)?.code;
+      if (errorCode === 'auth/too-many-requests') {
         Alert.alert('Too Many Requests', 'Please wait a few minutes before requesting another email.');
       } else {
         Alert.alert('Error', 'Failed to send verification email. Please try again.');
@@ -54,6 +56,7 @@ export default function VerifyEmailScreen({ onVerified }) {
   const handleCheckVerification = async () => {
     setLoading(true);
     try {
+      if (!auth.currentUser) return;
       await auth.currentUser.reload();
       if (auth.currentUser.emailVerified) {
         onVerified();

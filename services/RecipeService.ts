@@ -1,5 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { Recipe } from '../types';
+import type { Recipe } from '../types';
 
 const KEY_PREFIX = '@ully_recipes_';
 const ART_STYLES = ['lam', 'rothko', 'picasso'] as const;
@@ -69,8 +69,8 @@ export async function saveRecipe(uid: string, recipe: Partial<Recipe> & { id?: s
   const recipes = await getRecipes(uid);
   const index = recipes.findIndex((r) => r.id === recipe.id);
   const now = new Date().toISOString();
-  if (index >= 0) {
-    recipes[index] = { ...recipes[index], ...recipe, updatedAt: now };
+  if (index >= 0 && recipes[index]) {
+    recipes[index] = { ...recipes[index]!, ...recipe, updatedAt: now } as Recipe;
   } else {
     recipes.push({
       id: recipe.id || `recipe_${Date.now()}`,
@@ -78,7 +78,7 @@ export async function saveRecipe(uid: string, recipe: Partial<Recipe> & { id?: s
       method: recipe.method || 'Unknown',
       description: recipe.description || '',
       artSeed: recipe.artSeed || Math.floor(Math.random() * 10000),
-      artStyle: recipe.artStyle || ART_STYLES[Math.floor(Math.random() * ART_STYLES.length)],
+      artStyle: recipe.artStyle || (ART_STYLES[Math.floor(Math.random() * ART_STYLES.length)] ?? 'plant'),
       createdAt: now,
       updatedAt: now,
     } as Recipe);

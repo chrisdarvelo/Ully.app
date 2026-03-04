@@ -9,7 +9,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { AuthColors, Fonts } from '../utils/constants';
 import { GoldButton } from '../components/GoldGradient';
 
-export default function WelcomeScreen({ navigation }) {
+export default function WelcomeScreen({ navigation }: { navigation: any }) {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.content}>

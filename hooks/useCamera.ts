@@ -1,6 +1,7 @@
 import { useState, useRef, useCallback, useEffect } from 'react';
 import { Alert, Linking } from 'react-native';
-import { useCameraPermissions, CameraView, BarcodeScanningResult } from 'expo-camera';
+import { useCameraPermissions, CameraView } from 'expo-camera';
+import type { BarcodeScanningResult } from 'expo-camera';
 
 export type CameraMode = 'scan' | 'extraction' | null;
 

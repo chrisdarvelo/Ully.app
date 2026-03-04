@@ -12,7 +12,7 @@ import { AuthColors, Fonts, Colors } from '../utils/constants';
 const LAST_UPDATED = 'February 21, 2026';
 const EFFECTIVE_DATE = 'February 21, 2026';
 
-function Section({ title, children }) {
+function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <View style={styles.section}>
       <Text style={styles.sectionTitle}>{title}</Text>
@@ -21,11 +21,11 @@ function Section({ title, children }) {
   );
 }
 
-function Paragraph({ children }) {
+function Paragraph({ children }: { children: React.ReactNode }) {
   return <Text style={styles.paragraph}>{children}</Text>;
 }
 
-function BulletItem({ children }) {
+function BulletItem({ children }: { children: React.ReactNode }) {
   return (
     <View style={styles.bulletRow}>
       <Text style={styles.bullet}>-</Text>
@@ -34,7 +34,7 @@ function BulletItem({ children }) {
   );
 }
 
-export default function PrivacyPolicyScreen({ navigation, route }) {
+export default function PrivacyPolicyScreen({ navigation, route }: { navigation: any; route: any }) {
   const isModal = route?.params?.modal;
 
   return (

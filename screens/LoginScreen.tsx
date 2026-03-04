@@ -16,7 +16,7 @@ import { AuthColors, Fonts } from '../utils/constants';
 import CoffeeFlower from '../components/CoffeeFlower';
 import { GoldButton } from '../components/GoldGradient';
 
-export default function LoginScreen({ navigation }) {
+export default function LoginScreen({ navigation }: { navigation: any }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
@@ -32,11 +32,12 @@ export default function LoginScreen({ navigation }) {
       await signInWithEmailAndPassword(auth, email.trim(), password);
     } catch (error) {
       let message = 'An error occurred. Please try again.';
-      if (error.code === 'auth/user-not-found' || error.code === 'auth/wrong-password' || error.code === 'auth/invalid-credential') {
+      const errorCode = (error as any)?.code;
+      if (errorCode === 'auth/user-not-found' || errorCode === 'auth/wrong-password' || errorCode === 'auth/invalid-credential') {
         message = 'Invalid email or password.';
-      } else if (error.code === 'auth/invalid-email') {
+      } else if (errorCode === 'auth/invalid-email') {
         message = 'Please enter a valid email address.';
-      } else if (error.code === 'auth/too-many-requests') {
+      } else if (errorCode === 'auth/too-many-requests') {
         message = 'Too many attempts. Please try again later.';
       }
       Alert.alert('Sign In Failed', message);
