@@ -865,29 +865,31 @@ has proven revenue and has dedicated compliance resources in place.
 
 | Tier | Price | What's included |
 |---|---|---|
-| **Free** | 14-day full Pro trial, then limited | 20 AI messages/day, basic recipe library, news feed |
-| **Pro** | $9.99/month or **$79/year** | Unlimited AI, shot history, full dial-in assistant, offline KB, training logs |
-| **Business** | $24.99/location/month | Everything in Pro + maintenance scheduling, shared recipe library, POS integration, machine volumetrics, QuickBooks connection, team performance view, priority support |
+| **Free** | 14-day full Pro trial, then limited | 20 AI messages/day, read-only access to all platform data |
+| **Pro** | $7.99/month or **$59.99/year** (~$5/mo) | Unlimited AI, shot history, full dial-in assistant, offline KB, training logs |
+| **Business** | $49.99/location/month or **$399/location/year** (~$33/mo) | Everything in Pro + maintenance scheduling, POS integration, machine volumetrics, QuickBooks connection, team performance view, priority support |
+| **Business Pro** | $79/location/month (contact us) | Everything in Business + multi-location dashboard, custom AI on SOPs, API access, 4-hour SLA |
 | **Technician Lifetime** | $149 one-time (first 100 CTG members) | Full Pro forever — seeding the highest-leverage professional community |
 
-### Pricing anchors
+### Pricing anchors (2026 market-validated)
 
-- $79/year Pro = what Cropster charges **per month** — position this explicitly
-- $9.99/month Pro = 33% below Barista Hustle's $15/month individual tier
-- $24.99/location Business = a 20-location chain is $500/month MRR from one account
-- The Business tier's tool integrations (POS, QuickBooks, volumetrics) are the
-  primary justification for the price step-up — position as a purpose-built
-  operations platform, not a chat upgrade
-- Launch with a 14-day full Pro trial, not a feature-limited free tier — professionals
-  need to experience the complete product before committing
+- **$7.99/month Pro** — baristas earn $14-19/hr; $9.99 was a psychological barrier. $7.99 clears it.
+- **$59.99/year Pro** — 37% off monthly, ~$5/month equivalent. Standard for consumer apps (Duolingo, Calm, Headspace).
+- **$49.99/location Business** — 7shifts charges $76.99/location for scheduling alone. Ully includes scheduling + equipment + team + training + inventory + P&L + AI. Market floor for any scheduling tool is $35/location/month.
+- **$79/location Business Pro** — parity with Cropster ($79+/month for roast management only). Ully delivers the full ops stack.
+- **Dripos** (closest all-in-one competitor) charges $160/month and requires POS hardware. Ully Web at $49.99 is 70% cheaper, no hardware lock-in, AI-native.
+- **Positioning line**: "Everything 7shifts charges for scheduling — plus equipment, AI, inventory, and P&L. Same price."
+- Launch with a 14-day full trial, no credit card. After trial: paid plan or read-only mode (not hard cutoff).
+- Annual plans should be the default selection on pricing pages — annual subscribers churn at half the rate of monthly.
 
 ### Business model evolution
 
 | Phase | Model | Target price |
 |---|---|---|
-| v1 Consumer | 14-day Pro trial → freemium conversion | $9.99/month or $79/year |
-| v2 Professional | Pro + offline KB + maintenance + training logs | $14.99/month |
-| v3 Business | Location-based operator licence with tool integrations | $24.99/location/month |
+| v1 Consumer | 14-day Pro trial → freemium conversion | $7.99/month or $59.99/year |
+| v2 Professional | Pro + offline KB + maintenance + training logs | $9.99/month or $79.99/year |
+| v3 Business | Location-based operator licence with tool integrations | $49.99/location/month or $399/location/year |
+| v3 Business Pro | Multi-location + custom AI + API access | $79/location/month (contact us) |
 | v4 Roaster | Roaster seat licence | $99–299/month/seat |
 | v5 Agriculture | Cooperative licence (B2B) | $500–2000/month/cooperative |
 | Platform | Data licensing + traceability API | Enterprise contract |
