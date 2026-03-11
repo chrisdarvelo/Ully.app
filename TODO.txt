@@ -10,35 +10,16 @@
   (Security & correctness issues found in audit)
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-  [ ] JWT secret hard-fail in production
-        ully-web/src/lib/auth.ts:8
-        Throw hard error if JWT_SECRET env var is missing when NODE_ENV === 'production'
-        Currently falls back to a weak dev string — sessions can be forged
-
-  [ ] Null guard on org in chat route
-        ully-web/src/app/api/chat/route.ts:57
-        db...get() can return null — dereference happens without guard
-        Add: if (!org) return Response.json({ error: 'Org not found' }, { status: 500 })
+  [x] JWT secret hard-fail in production — fixed in auth.ts:9-11
+  [x] Null guard on org in chat route — fixed in chat/route.ts:63-65
+  [x] RBAC on equipment + team DELETE routes — role check on all mutating methods
+  [x] No message length cap on Claude chat route — 2000 char cap at chat/route.ts:51-53
+  [x] Replace Date.now() IDs with crypto.randomUUID() — done in web routes
 
   [ ] Role guard on business screens (mobile)
         screens/business/BusinessDashboardScreen, MaintenanceScreen, TeamScreen
         No check that profile.role === 'organization' before rendering
         Add role check in AppNavigator or at screen entry point
-
-  [ ] RBAC on equipment + team DELETE routes (web)
-        ully-web/src/app/api/equipment/route.ts, /api/team/route.ts
-        getSession() checks auth but never checks user.role
-        Only owner / manager should be able to mutate — add role check
-
-  [ ] Replace Date.now() IDs with crypto.randomUUID()
-        utils/idGenerator.ts + services/RecipeService.ts + services/CafeService.ts
-        Current approach has collision risk on rapid creates
-        Use crypto.randomUUID() everywhere — already available in RN and Node
-
-  [ ] No message length cap on Claude chat route (web)
-        ully-web/src/app/api/chat/route.ts
-        Unrestricted input reaches the Claude API — cost and abuse risk
-        Cap at 2000 chars before forwarding
 
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -101,14 +82,12 @@
 
   Web — polish before WoC
   [ ] About page: add real career timeline + drop founder photo at /public/images/founder.jpg
-  [ ] Dashboard: add quick-stats summary (equipment count, team size, low-stock items)
-        Currently empty on first login — bad first impression
-  [ ] Empty states: add guided empty states on Equipment, Team, Inventory
-        "Add your first machine →" pattern
-  [ ] Auth forms: add loading/disabled state on submit — prevent double-submit
-  [ ] Landing page: update mobile section (App Store / Play Store links or coming-soon)
-  [ ] Landing page: tighten hero CTA copy ("Try Ully Free" is cleaner than "Get Started Free")
-  [ ] Landing page: add "Built by a working espresso technician" credibility line
+  [x] Dashboard: quick-stats summary — metric cards + get-started section already live
+  [x] Empty states: guided empty states on Equipment, Team, Inventory — all done
+  [x] Auth forms: loading/disabled state on submit — already implemented
+  [x] Landing page: mobile section updated to "coming soon" copy
+  [x] Landing page: hero CTA → "Try Ully Free", nav CTA → "Try Ully Free"
+  [x] Landing page: added "Built by a working espresso technician" credibility line
 
   Infrastructure
   [ ] Get Railway public URL → deploy Firebase redirect from ully-coffee.web.app

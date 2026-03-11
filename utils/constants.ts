@@ -14,9 +14,11 @@ export const Colors = {
   background: '#0E0C0A',        // deep warm dark brown
   card: '#1A1614',              // slightly lighter warm brown
   text: '#FFFFFF',              // white
-  textSecondary: '#A09888',     // warm gray
-  danger: '#E74C3C',
-  border: '#2A2218',            // warm dark border
+  textSecondary: '#C4B8AA',     // warm subtle — aligned with web
+  danger: '#C84040',            // dark danger red — aligned with web
+  success: '#4A8C5C',           // muted green — aligned with web
+  warning: '#C89040',           // warm amber — aligned with web
+  border: '#1E1A17',            // warm dark border — aligned with web
   tabBar: '#0E0C0A',
   tabInactive: '#6B5E52',       // muted warm brown
 };
@@ -24,12 +26,12 @@ export const Colors = {
 export const AuthColors = {
   background: '#0E0C0A',
   text: '#FFFFFF',
-  textSecondary: '#A09888',
+  textSecondary: '#C4B8AA',     // aligned with web
   buttonFill: '#C8923C',        // crema gold
   buttonText: '#0E0C0A',        // dark text on gold
   buttonOutline: '#C8923C',
-  inputBorder: '#2A2218',
-  inputBackground: '#1A1614',
-  error: '#E74C3C',
+  inputBorder: '#1E1A17',       // aligned with web
+  inputBackground: '#0E0C0A',   // aligned with web
+  error: '#C84040',             // aligned with web
   link: '#C8923C',
 };
