@@ -40,6 +40,42 @@ Free to download. Pro at **$7.99/month** — unlimited AI, full dial-in assistan
 
 ---
 
+## Ully Learn — Apprentice System (Phase 1b)
+
+*Designed. Not yet built.*
+
+**"SCA in your Pocket"** — a progressive coffee apprenticeship embedded in the app.
+SCA courses cost $500+. Ully Learn delivers the same career-ladder progression
+on your phone, powered by AI-driven conversational quizzes instead of multiple-choice.
+
+### Tier structure
+
+| Tier | Stages | Target |
+|---|---|---|
+| Amateur | 10 | Home enthusiasts, new to specialty |
+| Barista | 10 | Aspiring and working café staff |
+| Hero | 10 | Experienced professionals, senior baristas |
+| Champion | 10 | Competition-level — WBC caliber |
+
+### The quiz format is the moat
+
+Ully doesn't ask "Which grind size for espresso?" It asks:
+*"You're pulling 18g in, 32g out in 35 seconds and it tastes sour. Walk me through your next adjustments."*
+Claude evaluates the response — open-ended, evaluative, not guesssable.
+
+### The business case for cafés
+
+Replacing a barista costs ~$3,000. Rank gives managers a visible, evidence-based
+signal for who's ready to advance — and a clear hook for retention:
+*"You don't touch the machine until you hit Hero rank."*
+
+On the Business Platform, ranks surface as a **Competency Map** — a heat map of
+each team member's skill strengths and gaps, tied to promotions and pay grades.
+
+> See `VISION.md` → Phase 1b for full architecture, technical risks, and web integration spec.
+
+---
+
 ## Tech Stack
 
 | Layer | Technology |
@@ -219,7 +255,7 @@ npm run e2e:recipe        # Save recipe flow
 
 ## Contact
 
-Support: [support@ullycoffee.com](mailto:support@ullycoffee.com)
+Support: [support@ullyapp.com](mailto:support@ullyapp.com)
 
 ---
 

@@ -1,52 +1,3 @@
-export interface Recipe {
-  id: string;
-  name: string;
-  method: string;
-  description: string;
-  artSeed: number;
-  artStyle: string;
-  createdAt: string;
-  updatedAt: string;
-}
-
-export interface Barista {
-  id: string;
-  name: string;
-  specialty: string;
-  bio: string;
-  avatarSeed: number;
-  avatarColor: string;
-  avatarUrl?: string;
-  recipes: { title: string; url: string }[];
-  blogs: { title: string; url: string }[];
-  recommendations: string[];
-  followed?: boolean;
-}
-
-export interface Cafe {
-  id: string;
-  name: string;
-  location?: string;
-  notes?: string;
-  addedAt: string;
-}
-
-export interface NewsArticle {
-  title: string;
-  source: string;
-  link: string;
-  date: string;
-}
-
-export interface BlogPost {
-  title: string;
-  url: string;
-  source: string;
-  baristaAvatarUrl?: string;
-  baristaAvatarColor?: string;
-  baristaId: string;
-}
-
 export type MessageRole = 'user' | 'ully' | 'assistant';
 
 export interface ChatMessage {
@@ -81,7 +32,7 @@ export interface UserProfile {
   favoriteMethod?: 'drip' | 'espresso' | 'pour_over';
   drinkAt?: 'home' | 'go_out';
   // Barista
-  skillLevel?: 'amateur' | 'semi_pro' | 'champion';
+  skillLevel?: 'amateur' | 'barista' | 'hero' | 'champion';
   baristaMethod?: 'espresso' | 'pour_over' | 'other';
   favoriteRoaster?: string;
   // Organization
@@ -163,4 +114,24 @@ export interface DialInData {
   taste: 'sour' | 'balanced' | 'bitter';
   image?: string;  // base64 — espresso shot photo
   imageUri?: string;
+}
+
+// ── Ully Learn — Apprentice System ───────────────────────────────────────────
+
+export type LearnTier = 'amateur' | 'barista' | 'hero' | 'champion';
+
+export interface LearnQuizResult {
+  stageId: string;   // e.g. 'amateur-3'
+  score: number;     // 0–100
+  completedAt: number; // unix timestamp
+}
+
+export interface LearnProgress {
+  tier: LearnTier;
+  stage: number;             // 1–10 within current tier
+  completedStages: string[]; // ['amateur-1', 'amateur-2', ...]
+  badges: LearnTier[];       // tiers fully completed
+  championComplete: boolean; // true = Champion tier done (top designation)
+  lastActivity: number;      // unix timestamp
+  quizHistory: LearnQuizResult[];
 }

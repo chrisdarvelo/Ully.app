@@ -11,9 +11,9 @@ Ully AI is a **mobile-first AI coffee companion** built for baristas, enthusiast
 
 **App Name:** Ully AI
 **Tagline:** *your coffee companion*
-**Bundle ID / Package:** `com.ullycoffee.app`
+**Bundle ID / Package:** `com.ullyapp.app`
 **Expo Project ID:** `baf4d91f-12b9-47cd-b0b4-a01aadd37f08`
-**Support:** support@ullycoffee.com
+**Support:** support@ullyapp.com
 
 ---
 
@@ -58,12 +58,9 @@ Ully-Coffee/
 │   ├── LoginScreen.tsx      # Email + password login
 │   ├── SignUpScreen.tsx     # Registration + age check (DOB not stored)
 │   ├── OnboardingScreen.tsx # Role questionnaire (consumer / barista / org)
-│   ├── HomeScreen.tsx       # Feed: Recipes, News, Baristas, Cafes (React Query)
+│   ├── HomeScreen.tsx       # Clean landing: logo + greeting + "ask ully" CTA (no feed)
 │   ├── AIScreen.tsx         # Ully AI chat, Dial-in chip, fun facts, voice input
 │   ├── SettingsScreen.tsx   # Profile tab: account, preferences, delete account
-│   ├── RecipeDetailScreen.tsx
-│   ├── BaristaDetailScreen.tsx
-│   ├── CafeDetailScreen.tsx
 │   ├── PrivacyPolicyScreen.tsx
 │   └── VerifyEmailScreen.tsx
 │
@@ -71,12 +68,7 @@ Ully-Coffee/
 │   ├── CoffeeFlower.tsx     # Animated SVG logo — used as spinner and brand mark
 │   ├── GoldGradient.tsx     # Gold gradient text wrapper
 │   ├── PaperBackground.tsx  # Dark gradient background (keep — blackish coffee look)
-│   ├── RecipeArtCover.tsx   # Procedural generative art for recipe cards
-│   ├── SectionRow.tsx       # Home feed section header with + button
 │   ├── SideDrawer.tsx       # Chat history panel in AI screen
-│   ├── HomeSkeleton.tsx     # Loading skeleton for HomeScreen
-│   ├── SkeletonLoader.tsx   # Generic skeleton block
-│   ├── EmptyState.tsx       # Empty list placeholder
 │   ├── ErrorBoundary.tsx    # React error boundary wrapping the whole app
 │   ├── NavigationIcons.tsx  # Bottom tab icons
 │   ├── DiagnosticIcons.tsx  # SVG icons for AI diagnostic results
@@ -94,11 +86,7 @@ Ully-Coffee/
 │   ├── WeatherLocationService.ts  # wttr.in weather + expo-location (30-min cache)
 │   ├── AuthService.ts       # deleteUserAccount (calls wipeUserData Cloud Function)
 │   ├── ProfileService.ts    # AsyncStorage: get/save UserProfile
-│   ├── RecipeService.ts     # AsyncStorage: CRUD recipes + 4 starter recipes
-│   ├── CafeService.ts       # AsyncStorage: CRUD saved cafes
-│   ├── BaristaService.ts    # Curated barista list + AsyncStorage follow state
-│   ├── BlogService.ts       # Blog posts from followed baristas
-│   └── NewsService.ts       # Coffee news (Perfect Daily Grind, Barista Mag, etc.)
+│   └── NotificationService.ts # Local push notification setup
 │
 ├── store/
 │   ├── authStore.ts         # Zustand: Firebase auth state (user, initializing)
@@ -144,9 +132,6 @@ App.tsx
     │   ├── Home → HomeScreen
     │   ├── AI   → AIScreen
     │   └── Profile → SettingsScreen
-    ├── RecipeDetailScreen
-    ├── BaristaDetailScreen
-    ├── CafeDetailScreen
     └── PrivacyPolicyScreen
 ```
 
@@ -235,10 +220,8 @@ All stored in `UserProfile` via `ProfileService` → AsyncStorage.
 | Data | Where | Key pattern |
 |---|---|---|
 | User profile | AsyncStorage | `@ully_profile_{uid}` |
-| Recipes | AsyncStorage | `@ully_recipes_{uid}` |
-| Cafes | AsyncStorage | `@ully_cafes_{uid}` |
-| Barista follows | AsyncStorage | `@ully_barista_follows_{uid}` |
 | Chat history | AsyncStorage | `@ully_chat_history` |
+| Learn progress | Firestore | `users/{uid}/learnProgress` |
 | Machines | AsyncStorage | `@ully_machines_{uid}` |
 | Service records | AsyncStorage | `@ully_service_records_{uid}` |
 | Team members | AsyncStorage | `@ully_team_members_{uid}` |
@@ -246,16 +229,15 @@ All stored in `UserProfile` via `ProfileService` → AsyncStorage.
 | Auth session | Firebase Auth SDK | managed |
 | Claude API key | Firebase Secret Manager | `CLAUDE_API_KEY` |
 
+> **Note:** Learn progress uses Firestore (not AsyncStorage) — cross-device visibility
+> and Business Platform sync are hard requirements for the apprentice system.
+
 ---
 
 ## AsyncStorage Key Index
 
 ```
 @ully_profile_{uid}
-@ully_recipes_{uid}
-@ully_cafes_{uid}
-@ully_cafes_migrated_{uid}
-@ully_barista_follows_{uid}
 @ully_chat_history
 @ully_machines_{uid}
 @ully_service_records_{uid}

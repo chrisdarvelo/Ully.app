@@ -61,7 +61,8 @@ const QUESTIONS: Record<UserRole, any[]> = {
       label: 'Your skill level?',
       chips: [
         { label: 'Amateur', value: 'amateur' },
-        { label: 'Semi-pro', value: 'semi_pro' },
+        { label: 'Barista', value: 'barista' },
+        { label: 'Hero', value: 'hero' },
         { label: 'Champion', value: 'champion' },
       ],
     },

@@ -55,18 +55,20 @@ single-purpose landing: greet the user, surface a rotating coffee tip, and send 
 This is the correct call for a professional tool — content feeds are a distraction, not a feature.
 Feed items (recipes, barista content, café maps, news) are documented below as deferred.
 
-**Deferred social features (reinstated post-launch):**
-- Personal recipe library with procedural art covers — removed from v1, planned for Phase 2
-- Curated barista content and blog feed — removed from v1, planned for Phase 2
-- Café bookmarking and personal coffee map — removed from v1, planned for Phase 2
-- Coffee news aggregation (Perfect Daily Grind, Barista Magazine, Daily Coffee News) — removed from v1, planned for Phase 2
+**Feed features — permanently removed:**
+- Coffee news aggregation — removed. The home screen will show a **Leaderboard** once Ully Learn ships.
+- Curated barista content and blog feed — removed.
+- Personal recipe library — removed.
+- Café bookmarking — removed.
+
+The home screen is a clean canvas for the apprentice system. No feeds return.
 
 **Planned (Phase 1b — Ully Learn):**
-- Duolingo-style coffee knowledge apprentice system
-- Four tiers matching onboarding roles: Amateur → Semi-Pro → Barista → Champion
-- Each tier contains 10 progressive stages (lessons + quizzes)
+- "SCA in your Pocket" coffee knowledge apprentice system
+- Four tiers: Amateur → Barista → Hero → Champion
+- Each tier contains 10 progressive stages (lessons + AI-powered conversational quizzes)
 - Completing onboarding automatically places user in Amateur tier Stage 1
-- Progression unlocks next tier; Champion tier targets competition-level barista knowledge
+- Champion tier targets competition-level barista knowledge
 - See Phase 1b section below for full design
 
 **Launch blocklist:**
@@ -83,29 +85,162 @@ Feed items (recipes, barista content, café maps, news) are documented below as 
 
 ### Concept
 
-A Duolingo-style progressive coffee knowledge system embedded in the app.
-Users earn their way through four tiers that mirror the real coffee career ladder.
+"SCA in your Pocket" — a progressive coffee knowledge system that mirrors the real-world
+career ladder, powered by AI-driven conversational quizzes instead of multiple-choice.
+Where SCA courses cost $500+, Ully Learn is the accessible, mobile-native alternative
+built for the TikTok generation of baristas.
+
+This is not Duolingo with coffee trivia. It is a structured apprenticeship — rooted
+in SCA-calibrated content, delivered through AI conversation, and tied to real career
+incentives via the Business Platform.
+
+### Three Pillars (Partner PoC)
+
+The minimum build to demonstrate Ully Learn to café/roaster partners. These three
+deliverables are the pitch — complete them before outreach.
+
+---
+
+#### Pillar 1 — Chapter 1: Amateur (PoC)
+
+**What it is:** 10 stages, fully playable, with interactive Taste Profiles and AI quiz logic.
+
+**Taste Profiles** — interactive flavor anchors used in every Amateur lesson:
+- **Cacao** — dark chocolate, roast-forward, low acidity
+- **Almond** — nutty, mild, balanced sweetness
+- **Tobacco** — earthy, complex, aged quality signal
+
+Each stage introduces a concept via 3–5 lesson screens, then runs an AI-powered
+conversational quiz evaluated by Claude. The Taste Profile vocabulary carries through
+all 10 stages — students learn to identify, describe, and dial-in using this language.
+
+**Why this scope:** Amateur is the entry point for every user regardless of skill level.
+It must be flawless. If partners can play it themselves and feel the progression, the
+system sells itself.
+
+**Build checklist:**
+- [ ] `LearnScreen.tsx` — tier map, progress rings, locked/unlocked states
+- [ ] `StageScreen.tsx` — lesson slides + Claude quiz flow
+- [ ] `LessonContent.ts` — Amateur 10-stage content: topics, quiz prompts, rubrics
+- [ ] Taste Profile intro screen (before Stage 1)
+- [ ] Badge + stage unlock animation
+- [ ] Firestore write on stage completion
+
+---
+
+#### Pillar 2 — Technician AI Persona
+
+**What it is:** A specialized Claude system prompt that responds like an experienced
+technician with 10+ years on commercial espresso equipment — zero fluff, direct diagnosis.
+
+**Persona rules:**
+- No preamble. No "Great question!" No hedging.
+- Starts with the most likely cause, not a list of possibilities.
+- Gives a specific fix: what to adjust, by how much, in what order.
+- Uses technician vocabulary: channeling, pre-infusion, group head, puck prep, backflush.
+
+**Shot analysis (Dial-in with photo):**
+- Identifies channeling from extraction pattern (uneven color, tiger-striping)
+- Flags over-tamping from cone/wavy extraction
+- Reads puck condition from the photo (dry/wet, cracked, imprinted)
+- Returns: diagnosis + one adjustment + expected result
+
+**System prompt location:** `functions/index.js` — injected into `chatWithUlly` alongside
+the base coffee-only system prompt. The Technician persona activates when a photo
+is attached or the Dial-in chip is tapped.
+
+**Why this matters for partners:** Café owners will test Ully by uploading a shot photo
+and seeing if it catches the same issue their head barista would catch. This is the demo
+that closes the room.
+
+---
+
+#### Pillar 3 — Team Progress Dashboard (MVP)
+
+**What it is:** A simple, exportable view on the Business Platform showing each team
+member's apprentice rank and skill gaps.
+
+**MVP table:**
+| Barista Name | Current Rank | Stages Completed | Skill Gap | Last Active |
+|---|---|---|---|---|
+| Alex | Barista | 14/20 | Extraction science | 2 days ago |
+| Jamie | Amateur | 6/10 | Milk texturing | 1 week ago |
+
+**Exportable Certification:**
+- PDF export: "Ully Apprentice Certification — [Name] — [Rank] — [Date]"
+- Designed for the business owner to use in HR records or display in the café
+
+**Implementation:**
+- Add `/training/apprentice` route to ully-web
+- Read `users/{uid}/learnProgress` from Firestore for each team member linked to the org
+- Rank map: Amateur (0–10) → Barista (11–20) → Hero (21–30) → Champion (31–40 stages)
+- PDF export via `window.print()` with print-specific CSS (no library needed for MVP)
+
+---
+
+### Business Case
+
+The ROI frame for café owners and managers:
+
+> **Replacing a barista costs ~$3,000** in recruiting, training, and lost productivity.
+> Ully Learn reduces that cost by compressing ramp-up time and making skill
+> progression visible — so managers retain good people longer and promote them
+> with confidence instead of guessing.
+
+The career-gate hook that makes it sticky:
+
+> *"You don't touch the machine until you hit Hero rank."*
+
+Managers can use rank as a gating mechanism for station access — a built-in
+incentive that makes progression feel real, not gamified.
+
+### Competitive Moat
+
+| What exists | What Ully Learn is |
+|---|---|
+| SCA courses — $500+, in-person, certificate-driven | Mobile-native, free with subscription, always current |
+| Multiple-choice quiz apps | AI-powered conversational quizzes — open-ended, evaluative, not guesssable |
+| YouTube tutorials | Structured curriculum + proof of completion |
+| Generic LMS platforms | Purpose-built for coffee, integrated with ops data |
+
+The AI quiz format is the key differentiator. Instead of "Which grind size for espresso?
+A) Fine B) Medium C) Coarse" — Ully asks *"You're pulling 18g in, 32g out in 35 seconds
+and it's too sour. Walk me through your next three adjustments."* Claude evaluates the
+response and gives feedback. This cannot be scraped, guessed, or auto-completed.
 
 ### Tier Structure
 
-| Tier | Who it's for | Stages |
-|---|---|---|
-| Amateur | Home enthusiasts, new to specialty coffee | 10 |
-| Semi-Pro | Experienced home brewers, aspiring baristas | 10 |
-| Barista | Working baristas, café staff | 10 |
-| Champion | Competition-level, World Barista Championship caliber | 10 |
+| Tier | Who it's for | Stages | Milestone |
+|---|---|---|---|
+| Amateur | Home enthusiasts, new to specialty coffee | 10 | Amateur badge |
+| Barista | Aspiring and working baristas, café staff | 10 | Barista badge |
+| Hero | Experienced professionals, senior baristas | 10 | Hero badge |
+| Champion | Competition-level, World Barista Championship caliber | 10 | Champion badge |
 
 **Total: 40 stages across 4 tiers.**
 
 ### Progression Rules
 
 1. Completing onboarding automatically places the user in **Amateur, Stage 1**.
-2. Each stage = a short lesson (3–5 screens) + a quiz (5–8 questions).
-3. Passing a quiz (≥80%) unlocks the next stage.
+2. Each stage = a short lesson (3–5 screens) + an AI-powered conversational quiz.
+3. Passing a quiz (evaluated by Claude, ≥80% equivalent) unlocks the next stage.
 4. Completing all 10 stages in a tier unlocks the next tier.
 5. Tier completion grants a badge displayed on the user's profile.
-6. Users who selected "Barista" in onboarding start at Semi-Pro Stage 1 (skips Amateur).
-7. Users who selected "Organization" in onboarding start at Barista Stage 1.
+6. Users who selected "Barista" skill level in onboarding start at Barista Stage 1 (skips Amateur).
+7. Users who selected "Hero" skill level start at Hero Stage 1.
+8. Users who selected "Organization" in onboarding start at Barista Stage 1.
+
+### AI Quiz Design
+
+Quizzes are **conversational, not multiple-choice.** Claude plays the examiner:
+
+- Presents a real-world scenario ("You're dialling in a new SO Ethiopia natural...")
+- Evaluates the user's free-text response for correctness, depth, and reasoning
+- Gives targeted feedback before moving to the next question
+- Scores holistically (not keyword matching) — harder to game, higher knowledge signal
+
+This format is a world-first integration of conversational AI into structured
+professional certification. It is the moat. Protect it.
 
 ### Sample Stage Topics
 
@@ -121,31 +256,78 @@ Users earn their way through four tiers that mirror the real coffee career ladde
 9. Barista tools: tamper, scale, timer, portafilter.
 10. How to taste coffee: the flavor wheel.
 
-**Semi-Pro (1–10)** — dial-in, extraction, water chemistry, latte art fundamentals...
+**Barista (1–10)** — dial-in, extraction, water chemistry, latte art fundamentals, milk science...
 
-**Barista (1–10)** — SCA protocols, workflow optimization, customer service, calibration...
+**Hero (1–10)** — SCA protocols, workflow optimization, customer service, calibration, multi-origin cupping...
 
-**Champion (1–10)** — WBC judging criteria, signature drink design, sensory science, terroir...
+**Champion (1–10)** — WBC judging criteria, signature drink design, sensory science, terroir, competition prep...
+
+### Web Platform: Competency Maps
+
+On the Business Platform, manager view upgrades from a simple training log to a
+visual **Competency Map** — a heat map of each team member's strengths and gaps
+across skill areas (espresso, milk, equipment, customer service, cupping, etc.).
+
+- Rank is visible to the manager — tied to the mobile apprentice progress
+- Promotions and pay raises can be tied to rank milestones (e.g., Semi-Pro → eligible for head bar)
+- Org can configure one custom chapter per their roaster or house style (v1 limit — no full course creator)
+- Heat map is built from training session scores, apprentice quiz results, and Ully AI interaction topics
+
+This transforms staff development from a gut-feel conversation into an evidence-based
+process — and gives managers a clear answer to "why does this person deserve a raise."
 
 ### Architecture (future implementation)
 
+> **Critical:** AsyncStorage is insufficient for Ully Learn. Progress must sync across
+> devices and be visible on the Business Platform. **Firestore sync is a hard requirement
+> before shipping this feature.** Design for Firestore from day one.
+
 ```
-AsyncStorage key: @ully_learn_progress_{uid}
+Firestore path: users/{uid}/learnProgress
 
 {
-  tier: 'amateur' | 'semi-pro' | 'barista' | 'champion',
-  stage: number,          // 1–10
+  tier: 'amateur' | 'barista' | 'hero' | 'champion',
+  stage: number,              // 1–10
   completedStages: string[],  // ['amateur-1', 'amateur-2', ...]
-  badges: string[],       // ['amateur', 'semi-pro', ...]
-  lastActivity: number,   // timestamp
+  badges: string[],           // ['amateur', 'barista', 'hero', 'champion']
+  championComplete: boolean,  // true when Champion tier complete
+  lastActivity: number,       // timestamp
+  quizHistory: {              // lightweight — question ID + score only
+    stageId: string,
+    score: number,
+    completedAt: number,
+  }[]
 }
 ```
 
 Screens needed:
 - `LearnScreen.tsx` — tier map + progress rings (tab 3 or modal from Home)
-- `StageScreen.tsx` — lesson slides + quiz flow
-- `BadgeScreen.tsx` — earned badge showcase
-- `LessonContent.ts` — static lesson + quiz data per stage (JSON or TS object)
+- `StageScreen.tsx` — lesson slides + AI quiz flow
+- `BadgeScreen.tsx` — earned badge showcase, Champion badge display
+- `LessonContent.ts` — static lesson data per stage (JSON or TS object)
+
+Web additions:
+- `/training` upgrade — Competency Map heat map view alongside existing training log
+- Rank display on team member cards
+
+### Leaderboard (replaces all feeds)
+
+The news feed, barista content, recipes, and café feeds are **gone permanently.**
+The home screen is a clean canvas for the apprentice system.
+
+Once Ully Learn ships, the home screen will surface a **Leaderboard** — top ranks
+within the user's org, or global top performers (opt-in). Amateur / Barista / Hero /
+Champion rank cards replace news cards. Retention via progress, not content consumption.
+
+### Technical Risks
+
+| Risk | Mitigation |
+|---|---|
+| **Content trap** — 40 stages requires deep insider knowledge to author | Author Amateur tier first. Ship with 10 stages. Expand on feedback. |
+| **Firestore sync** — AsyncStorage insufficient for cross-device and web visibility | Must be architected with Firestore from day one. No AsyncStorage fallback for learn progress. |
+| **AI quiz reliability** — Claude must grade consistently and fairly | Strict system prompt for the examiner role. Fixed rubric per stage injected as context. |
+| **No course creator in v1** — orgs want custom content | One custom chapter per org (house style / roaster profile). Full course creator is post-Series A. |
+| **Naming** — tier names are locked | Amateur / Barista / Hero / Champion. No Semi-Pro. |
 
 ---
 
