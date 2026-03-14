@@ -113,9 +113,9 @@ const QUESTIONS: Record<UserRole, any[]> = {
 };
 
 const COMPLETION_SUBTITLES: Record<UserRole, string> = {
-  consumer: 'Your personalized coffee feed is ready.',
-  barista: 'Your professional workspace is ready.',
-  organization: 'Your coffee workspace is ready.',
+  consumer: 'Your AI co-pilot is ready. Start learning.',
+  barista: 'Your co-pilot is ready. Begin your training.',
+  organization: 'Your control tower is ready.',
 };
 
 export default function OnboardingScreen({ navigation }: { navigation: any }) {
@@ -358,7 +358,7 @@ export default function OnboardingScreen({ navigation }: { navigation: any }) {
               {role ? COMPLETION_SUBTITLES[role] : ''}
             </Text>
             <GoldButton
-              label={saving ? 'Saving...' : 'Enter the Feed'}
+              label={saving ? 'Saving...' : 'Start Flying'}
               onPress={handleFinish}
               disabled={saving}
               style={{ borderRadius: 10, marginTop: 24 }}
