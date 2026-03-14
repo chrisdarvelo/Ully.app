@@ -292,7 +292,7 @@ incentive that makes progression feel real, not gamified.
 
 ```
 Free — forever
- └─ 20 AI messages/day
+ └─ 20 AI copilot messages/day
  └─ Ully Learn: Amateur Stages 1–3 (permanent, never locked away)
  └─ Progress and badges preserved even after trial ends
  └─ 14-day Pro trial on first signup (full access, no credit card)
@@ -303,17 +303,23 @@ Pro — $7.99/month
  └─ Progress badges, stage unlocks, quiz history
  └─ (Certified Espresso Pilot credential not included)
 
-Certified Espresso Pilot — premium add-on (price TBD)
- └─ Champion tier examination: AI oral defense with Claude as examiner
- └─ Exportable Ully Certified Espresso Pilot credential (PDF + digital badge)
- └─ Verifiable certification tied to account and date
- └─ Individual purchase OR redeemable via Business seat
+Pro Annual — $79/year  ← 2 months free vs monthly
+ └─ Everything in Pro
+ └─ Control Tower — full Business Platform access
+ └─ Crew management & shift scheduling
+ └─ Equipment register & full service history
+ └─ Inventory with par-level alerts
+ └─ Revenue & expense intelligence
+ └─ Training logs & certification tracking per team member
+ └─ Unlimited crew members
 
-Business — owner/org tier (price TBD, per seat or team bundle)
- └─ Purchase certification seats for team members
- └─ Team Competency Map on the Business Platform web dashboard
- └─ Track each barista's tier, quiz scores, and competency gaps
- └─ Exportable team certification report for HR records
+Certified Espresso Pilot — $150 one-time
+ └─ Unlocked after completing the Hero-Champion curriculum
+ └─ Exclusive Test Prep material — final tier only
+ └─ Champion tier examination: AI oral defense with Claude as examiner
+ └─ Official Barista Champion Certificate (PDF + digital badge)
+ └─ Verifiable certification tied to account and date
+ └─ Individual purchase OR sponsored by owner via Pro Annual seat
 ```
 
 **The free tier is designed to be sticky, not stingy.**
@@ -536,16 +542,30 @@ Firestore path: users/{uid}/learnProgress
 
 ## Phase 2 — Ully Business Platform (Web)
 
-**Status:** Deferred. Repo exists at `ully-web`. Architecture defined.
+**Status:** Active. Repo at `ully-web`. Core platform built and deploying to ullyapp.com.
 
 **Who it serves:** Café owners, roasters, multi-site operators.
 
-**Core features (planned):**
-- Team competency maps and pilot certification tracking
-- Machine maintenance logs and technician callout reduction metrics
-- Labour cost and service volume dashboards
+**Framing:** The Control Tower. While the barista learns and operates on the mobile app (the cockpit), the owner manages from the web platform — crew progress, equipment status, inventory, revenue, and AI-powered operational recommendations. Both interfaces talk to the same Ully AI, grounded in the org's live data.
+
+**Built and live:**
+- Team management, shift scheduling, invite system
+- Equipment register and full service history
+- Inventory tracking with par-level alerts
+- Revenue and expense logging
+- Ully AI chat — context-aware, grounded in org data (equipment, team, inventory)
+- Training logs and skill tracking per team member
+
+**Included in Pro Annual ($79/year)** — not a separate product tier.
+
+**Roadmap:**
+- Team Competency Map — visual heat map of each barista's progress through the curriculum
+- PDF certification export per team member
+- POS integration (Square first, then Toast/Lightspeed)
+- QuickBooks sync for P&L visibility
+- Machine volumetrics (La Marzocco, Sanremo native API where supported)
+- Multi-location dashboard
 - Org-specific training chapter builder (one custom chapter per org, v1)
-- Integration with Ully mobile: ranks surface automatically from Firestore
 
 ---
 

@@ -29,8 +29,10 @@ at the bar, mid-service, without calling a technician.
 
 Free to download — includes Amateur Stages 1–3 of Ully Learn forever, plus a **14-day
 full Pro trial** on first signup. Pro at **$7.99/month** — unlimited AI and all 40
-learning stages. The **Certified Espresso Pilot** credential is a premium add-on,
-available individually or purchased by owners for their team.
+learning stages. **Pro Annual at $79/year** includes the full Business Platform (Control
+Tower) for café owners. The **Certified Espresso Pilot** credential is a **$150 one-time
+purchase** — unlocked after completing the Hero-Champion curriculum, available individually
+or sponsored by owners for their team.
 
 > Part of the Ully platform. For café and business operations, see [Ully Business Platform](https://github.com/chrisdarvelo/ully-web).
 

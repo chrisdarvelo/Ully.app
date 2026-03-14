@@ -62,7 +62,11 @@ Ully-app/
 │   ├── AIScreen.tsx         # Ully AI chat, Dial-in chip, fun facts, voice input
 │   ├── SettingsScreen.tsx   # Profile tab: account, preferences, delete account
 │   ├── PrivacyPolicyScreen.tsx
-│   └── VerifyEmailScreen.tsx
+│   ├── VerifyEmailScreen.tsx
+│   └── business/
+│       ├── BusinessDashboardScreen.tsx  # Owner dashboard overview
+│       ├── MaintenanceScreen.tsx        # Equipment maintenance scheduling
+│       └── TeamScreen.tsx               # Crew management
 │
 ├── components/
 │   ├── CoffeeFlower.tsx     # Animated SVG logo — used as spinner and brand mark
@@ -72,9 +76,15 @@ Ully-app/
 │   ├── ErrorBoundary.tsx    # React error boundary wrapping the whole app
 │   ├── NavigationIcons.tsx  # Bottom tab icons
 │   ├── DiagnosticIcons.tsx  # SVG icons for AI diagnostic results
-│   └── ai/
-│       ├── CameraModal.tsx  # Camera + image picker modal for AI screen
-│       └── ChatHistory.tsx  # Scrollable chat history list
+│   ├── ai/
+│   │   ├── ActionChips.tsx  # Quick-action chips on AI screen
+│   │   ├── AIIcons.tsx      # Icons used within the AI chat interface
+│   │   ├── CameraModal.tsx  # Camera + image picker modal for AI screen
+│   │   ├── ChatHistory.tsx  # Scrollable chat history list
+│   │   └── DialInModal.tsx  # Espresso dial-in assistant modal
+│   └── business/
+│       ├── BottomSheet.tsx  # Reusable bottom sheet for business screens
+│       └── FormField.tsx    # Form field component for business data entry
 │
 ├── hooks/
 │   ├── useUllyChat.ts       # ALL AI chat logic: messages, history, weather context
@@ -141,9 +151,17 @@ App.tsx
 
 These rules govern Ully's personality and scope. **Do not change them without deliberate intent.**
 
-**The core mission:** Ully is a master espresso technician and barista instructor whose purpose
-is to develop baristas into certified espresso pilots — professionals who understand their machine
+**The core mission:** Ully is a flight instructor and co-pilot for baristas. Its purpose is to
+develop baristas into certified espresso pilots — professionals who understand their machine
 at instrument level, the way a pilot understands their aircraft.
+
+The barista is the pilot. The espresso machine is the aircraft. Ully is the flight instructor
+sitting next to them — during every pre-shift check, mid-rush fault, and post-shift debrief.
+
+**Language rule:** Use the pilot/copilot/flight instructor/wings metaphor freely in framing and
+positioning copy. Do NOT use literal aviation hardware terms (aircraft systems, airworthiness,
+squawk, instrument flying) in UI labels or feature names — they confuse users in a coffee context.
+Keep technical language espresso-precise: OPV, solenoid, group head, TDS, extraction yield.
 
 1. **Espresso mastery domain.** Ully answers all questions within espresso and coffee craft:
    - Machine systems: boilers (HX, dual-boiler, single, thermoblock), pumps (rotary/vibratory), OPV, solenoids, flow meters, pressure systems
@@ -239,6 +257,7 @@ All stored in `UserProfile` via `ProfileService` → AsyncStorage.
 | User profile | AsyncStorage | `@ully_profile_{uid}` |
 | Chat history | AsyncStorage | `@ully_chat_history` |
 | Learn progress | Firestore | `users/{uid}/learnProgress` |
+| Certification status | Firestore | `users/{uid}/learnProgress.championComplete` |
 | Machines | AsyncStorage | `@ully_machines_{uid}` |
 | Service records | AsyncStorage | `@ully_service_records_{uid}` |
 | Team members | AsyncStorage | `@ully_team_members_{uid}` |
