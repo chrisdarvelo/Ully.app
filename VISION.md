@@ -466,28 +466,28 @@ professional certification. It is the moat. Protect it.
 10. Customer service: translating technical knowledge for guests.
 
 **Hero (1–10)** — Systems knowledge
-1. Boiler types and their implications: single, HX, dual-boiler, thermoblock.
-2. Pump mechanics: rotary vs. vibratory, pressure calibration, pump output.
-3. The OPV: what it does, how to set it, failure symptoms.
-4. Temperature management: PID controllers, thermal mass, thermosiphon.
-5. Solenoid valves: function, failure modes, diagnostic tests.
-6. Pressure profiling: pre-infusion, declining pressure, flat profiling — when and why.
-7. Flow meters: volumetric dosing, flow control, calibration.
-8. Thermodynamics applied to espresso: heat transfer, steam pressure, boiler dynamics.
-9. Team training: building skill progressions, running calibrations, feedback techniques.
-10. Situational awareness: diagnosing under service pressure, reading the room.
+1. Boiler types: single-boiler, HX, dual-boiler, thermoblock — temperature behavior, workflow implications, recovery time.
+2. Hydraulic circuit: water path from inlet to group head — pump, pre-infusion chamber, solenoid, group, drain.
+3. Pump mechanics: rotary vs. vibratory pumps — pressure calibration, output consistency, wear diagnosis.
+4. The OPV: purpose, correct setting (typically 9 bar at the group), over-pressure symptoms, adjustment procedure.
+5. Temperature management: PID controllers, thermal mass, thermosiphon flow, stability under back-to-back pulls.
+6. Solenoid valves: 3-way solenoid function, failure modes (dripping, no drain, stuck open), diagnostic tests.
+7. Pressure profiling: pre-infusion, declining pressure, flat profiling — mechanical vs. electronic, when and why.
+8. Flow meters and volumetric dosing: how flow meters work, calibration, drift diagnosis.
+9. Team training: building skill progressions, running group calibrations, giving technical feedback, shift structure.
+10. Situational awareness: diagnosing under service pressure, reading instruments mid-rush, prioritizing when multiple things are wrong.
 
 **Champion (1–10)** — Certified Espresso Pilot
-1. Advanced thermodynamics: vapor pressure curves, thermal conductivity of group materials.
-2. Machine maintenance: gasket replacement, group head rebuild, valve cleaning.
-3. Water system deep dive: filtration, scale buildup, softener management.
-4. Boiler pressure and steam quality: relationship between boiler pressure and steam temperature.
-5. Electrical systems: heating element diagnosis, PID wiring, thermostat behavior.
-6. Signature drink design: technical construction, recipe documentation, reproducibility.
-7. Competition preparation: WBC/USBC format, technical judge criteria, presentation standards.
-8. Sensory science: psychophysics of taste, fatigue, panel calibration.
-9. Business operations: labour cost, covers, machine ROI, maintenance scheduling.
-10. Certification examination: full machine systems audit — oral defense with Claude as examiner.
+1. Advanced hydraulics: full machine water circuit under load — pressure drop across the system, line pressure vs. pump pressure, inlet pressure requirements, pressure gauge placement and interpretation.
+2. Electrical systems: machine power circuit overview, heating element types (tubular, band, immersion), element failure diagnosis, fuse and thermal cutout behavior, reading a wiring diagram.
+3. Control boards and electronics: PID wiring and sensor inputs (thermocouple, RTD), pressure transducers, flow meter signal, relay boards, common control board failure modes, firmware update procedures.
+4. Water supply and filtration: municipal vs. well water, hardness and TDS targets for espresso (50–150 ppm total hardness), carbon filtration, scale inhibitor cartridges, softener resin beds, RO systems and remineralization, testing water before and after filtration.
+5. Preventive maintenance program: daily/weekly/monthly/annual maintenance schedules, backflush protocol, group head gasket and screen replacement intervals, descaling frequency by water hardness, OPV check cadence, pump pressure verification, boiler inspection, full strip-down and rebuild intervals.
+6. Advanced thermodynamics: vapor pressure curves, thermal conductivity of group head materials (brass vs. stainless vs. copper), heat loss modeling, steam quality and dryness fraction, boiler pressure vs. steam temperature at the wand.
+7. Fault diagnosis under pressure: systematic troubleshooting methodology — isolate, test, confirm, fix — applied to hydraulic, electrical, and mechanical failures mid-service.
+8. Signature drink design and documentation: technical construction, reproducibility, recipe documentation standards, training a team to replicate.
+9. Sensory science and panel calibration: psychophysics of taste and smell, fatigue management, calibrating a team to a shared sensory standard.
+10. Certification examination — The Full Systems Audit: an AI-conducted oral defense covering all seven machine systems. Claude presents real failure scenarios across hydraulics, electrical, control systems, water, and maintenance. The candidate must diagnose, explain causation, and prescribe a fix with specific steps and tolerances. No multiple choice. No partial credit for vague answers. Passing standard: a technician with 5+ years on commercial equipment would agree with the diagnosis and repair plan.
 
 ---
 
