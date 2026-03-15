@@ -2,7 +2,7 @@
   <img src="./assets/icon.png" alt="Ully AI" width="120" />
 
   <h1>Ully AI</h1>
-  <p><em>Know your machine the way a pilot knows their plane.</em></p>
+  <p><em>Know your machine the way a pilot knows his aircraft.</em></p>
 
   <p>
     <img src="https://img.shields.io/badge/platform-iOS%20%7C%20Android-lightgrey?style=flat-square" />
